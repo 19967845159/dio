@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>后湖AI课 - 希望帮你成为AI高手</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{font-family:"Noto Sans SC","WenQuanYi Micro Hei","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f8fafc;color:#1e293b;line-height:1.7;font-size:15px}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#f1f5f9}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#3b82f6,#8b5cf6);z-index:1000;transition:width .15s ease;width:0}
+.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:901;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:8px 12px;font-size:20px;cursor:pointer;color:#1e293b;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.back-to-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;background:#3b82f6;color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer;z-index:900;opacity:0;transform:translateY(20px);transition:all .3s ease;box-shadow:0 4px 12px rgba(59,130,246,0.3)}
+.back-to-top.visible{opacity:1;transform:translateY(0)}.back-to-top:hover{background:#2563eb;transform:translateY(-2px)}
+.layout{display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:280px;height:100vh;background:#fff;border-right:1px solid #e2e8f0;overflow-y:auto;z-index:800;padding:20px 0;box-shadow:2px 0 8px rgba(0,0,0,0.04)}
+.sidebar-header{padding:0 20px 20px;font-size:20px;font-weight:700;color:#3b82f6;border-bottom:1px solid #e2e8f0;margin-bottom:12px}
+.nav-section{padding:8px 20px 4px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-top:8px}
+.nav-link{display:flex;align-items:center;padding:7px 20px 7px 28px;color:#64748b;text-decoration:none;font-size:13px;transition:all .2s;border-left:3px solid transparent;cursor:pointer;gap:8px}
+.nav-link:hover{color:#3b82f6;background:#eff6ff}.nav-link.active{color:#3b82f6;background:#eff6ff;border-left-color:#3b82f6;font-weight:600}
+.nav-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.main{margin-left:280px;flex:1;max-width:900px;padding:40px 40px 80px}
+.hero{text-align:center;padding:60px 20px;margin-bottom:48px}
+.hero h1{font-size:42px;font-weight:800;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.hero p{font-size:18px;color:#64748b;max-width:600px;margin:0 auto}
+.hero-signature{font-size:16px;font-style:italic;color:#94a3b8;margin:8px auto 0;letter-spacing:2px;font-family:"STKaiti","KaiTi","楷体","Palatino Linotype","Georgia",serif}
+.hero-tags{display:flex;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap}
+.hero-tag{padding:4px 14px;border-radius:20px;font-size:13px;font-weight:500}
+.toc{margin-bottom:56px}.toc h2{font-size:24px;font-weight:700;margin-bottom:24px;color:#1e293b}
+.toc-group{margin-bottom:24px}.toc-group-title{font-size:13px;font-weight:600;margin-bottom:10px;padding-left:4px;display:flex;align-items:center;gap:6px}
+.toc-group-title .group-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.toc-card{background:#fff;border-radius:8px;padding:10px;text-decoration:none;color:inherit;transition:all .25s;cursor:pointer;border:1px solid #e2e8f0;position:relative;overflow:hidden}
+.toc-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+.toc-card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 8px 25px rgba(59,130,246,0.15);border-color:#93c5fd}
+.toc-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-bottom:5px}
+.toc-card-title{font-size:11px;font-weight:600;margin-bottom:1px;line-height:1.2}
+.toc-card-module{font-size:9px;color:#94a3b8}
+.module{margin-bottom:56px}
+.module-header{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding-bottom:16px;border-bottom:2px solid #e2e8f0}
+.module-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-weight:700}
+.module-header h2{font-size:26px;font-weight:700}.module-header p{color:#64748b;font-size:14px}
+.card{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.06);position:relative;overflow:hidden;animation:fadeInUp .5s ease;transition:all .3s cubic-bezier(0.4,0,0.2,1)}
+.card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;transition:width .3s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.12);border-color:#cbd5e1}
+.card:hover::before{width:6px}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.card-header-left{display:flex;align-items:center;gap:12px}
+.lesson-num{font-size:13px;font-weight:700;padding:3px 10px;border-radius:8px;color:#fff}
+.card-title{font-size:20px;font-weight:700}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.card-tag{padding:2px 10px;border-radius:6px;font-size:11px;font-weight:500;background:#f1f5f9;color:#64748b}
+.card-content p{margin-bottom:12px;color:#334155}
+.card-content ul,.card-content ol{margin:12px 0 16px 20px;color:#334155}
+.card-content li{margin-bottom:6px}
+.card-content h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:#1e293b}
+.card-content h4{font-size:14px;font-weight:600;margin:16px 0 8px;color:#334155}
+.highlight{color:#3b82f6;font-weight:600}strong{color:#1e293b}
+.svg-container{background:#f8fafc;border-radius:12px;padding:20px;margin:16px 0;text-align:center;border:1px solid #e2e8f0}
+.svg-container svg{max-width:100%;height:auto}
+.svg-caption{font-size:12px;color:#94a3b8;margin-top:8px;text-align:center}
+.prompt-box{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:0;margin:12px 0;position:relative;overflow:hidden}
+.prompt-box .prompt-header{display:flex;align-items:center;justify-content:flex-end;padding:6px 12px;background:#e2e8f0;border-bottom:1px solid #e2e8f0}
+.prompt-box .copy-btn{background:#3b82f6;color:#fff;border:none;border-radius:6px;padding:4px 12px;font-size:12px;cursor:pointer;transition:all .2s;font-family:inherit}
+.prompt-box .copy-btn:hover{background:#2563eb}
+.prompt-box .copy-btn.copied{background:#10b981}
+.prompt-box .prompt-content{padding:16px 20px;font-family:"Fira Code","SF Mono",Consolas,monospace;font-size:13px;color:#334155;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+
+.learning-goals{background:#eff6ff;border-radius:10px;padding:16px 20px;margin-top:16px}
+.learning-goals h4{color:#3b82f6;font-size:13px;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px}
+.learning-goals li{font-size:13px;color:#475569;margin-bottom:4px}
+.table-wrapper{overflow-x:auto;margin:16px 0}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0}
+.data-table thead{background:#eff6ff}
+.data-table th{padding:10px 14px;text-align:left;font-weight:600;color:#1e293b;border-bottom:2px solid #dbeafe;font-size:12px;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap}
+.data-table td{padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#334155}
+.data-table tbody tr:nth-child(even){background:#f8fafc}.data-table tbody tr:hover{background:#eff6ff}
+.data-table .price{font-family:"Fira Code",monospace;font-size:12px;color:#64748b}
+.special-card{background:linear-gradient(135deg,#eff6ff,#f5f3ff);border:2px solid #c7d2fe;border-radius:16px;padding:36px;margin-bottom:32px;box-shadow:0 4px 20px rgba(59,130,246,0.08);transition:all .3s ease}
+.special-card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.15)}
+.special-card h2{font-size:24px;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.special-card>p{color:#64748b;margin-bottom:24px}
+.decision-tree{background:#f8fafc;border-radius:12px;padding:24px;margin:16px 0;border:1px solid #e2e8f0}
+.decision-tree h3{font-size:14px;font-weight:600;color:#1e293b;margin-bottom:16px}
+.footer{text-align:center;padding:48px 20px;color:#94a3b8;font-size:13px;border-top:1px solid #e2e8f0;margin-top:48px}
+.footer a{color:#3b82f6;text-decoration:none}
+.divider{height:1px;background:#e2e8f0;margin:32px 0}
+.callout{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0}
+.callout-title{font-size:13px;font-weight:600;color:#3b82f6;margin-bottom:8px}
+.callout p{font-size:13px;color:#475569;line-height:1.7}
+.callout.tip{background:#f0fdf4;border-left-color:#10b981}
+.callout.tip .callout-title{color:#10b981}
+.callout.warning{background:#fefce8;border-left-color:#f59e0b}
+.callout.warning .callout-title{color:#f59e0b}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:transform .3s ease;z-index:999}.sidebar.open{transform:translateX(0)}.menu-toggle{display:block}.main{margin-left:0;padding:24px 16px 60px}.hero h1{font-size:28px}.toc-grid{grid-template-columns:repeat(2,1fr)}.card{padding:24px 20px}}
+@media(max-width:600px){.toc-grid{grid-template-columns:1fr}}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:998}.sidebar-overlay.show{display:block}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMenu()"></div>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header">📚 后湖AI课</div>
+<div class="nav-section">认知篇</div>
+<a class="nav-link" href="#lesson-1" data-lesson="1"><span class="nav-dot" style="background:#3b82f6"></span>认知 L1 AI的四次进化</a>
+<a class="nav-link" href="#lesson-2" data-lesson="2"><span class="nav-dot" style="background:#3b82f6"></span>认知 L2 AI能做什么与不能做什么</a>
+<a class="nav-link" href="#lesson-3" data-lesson="3"><span class="nav-dot" style="background:#3b82f6"></span>认知 L3 从AI工具到AI驱动工作</a>
+<div class="nav-section">原理篇</div>
+<a class="nav-link" href="#lesson-4" data-lesson="4"><span class="nav-dot" style="background:#8b5cf6"></span>原理 L1 语言的本质是数学</a>
+<a class="nav-link" href="#lesson-5" data-lesson="5"><span class="nav-dot" style="background:#8b5cf6"></span>原理 L2 大模型的诞生</a>
+<a class="nav-link" href="#lesson-6" data-lesson="6"><span class="nav-dot" style="background:#8b5cf6"></span>原理 L3 LLM是如何工作的</a>
+<a class="nav-link" href="#lesson-7" data-lesson="7"><span class="nav-dot" style="background:#8b5cf6"></span>原理 L4 多模态：感知的统一</a>
+<a class="nav-link" href="#lesson-8" data-lesson="8"><span class="nav-dot" style="background:#8b5cf6"></span>原理 L5 RAG：给大模型装上知识库</a>
+<a class="nav-link" href="#lesson-9" data-lesson="9"><span class="nav-dot" style="background:#8b5cf6"></span>原理 L6 Agent：从问答到行动</a>
+<div class="nav-section">使用篇</div>
+<a class="nav-link" href="#lesson-10" data-lesson="10"><span class="nav-dot" style="background:#10b981"></span>使用 L1 识别真正的问题</a>
+<a class="nav-link" href="#lesson-11" data-lesson="11"><span class="nav-dot" style="background:#10b981"></span>使用 L2 认知镜像法</a>
+<a class="nav-link" href="#lesson-12" data-lesson="12"><span class="nav-dot" style="background:#10b981"></span>使用 L3 追问链与深度思考</a>
+<a class="nav-link" href="#lesson-13" data-lesson="13"><span class="nav-dot" style="background:#10b981"></span>使用 L4 MECE结构化拆解</a>
+<a class="nav-link" href="#lesson-14" data-lesson="14"><span class="nav-dot" style="background:#10b981"></span>使用 L5 角色扮演与场景设定</a>
+<a class="nav-link" href="#lesson-15" data-lesson="15"><span class="nav-dot" style="background:#10b981"></span>使用 L6 多步骤复杂任务</a>
+<div class="nav-section">构建篇</div>
+<a class="nav-link" href="#lesson-16" data-lesson="16"><span class="nav-dot" style="background:#f59e0b"></span>构建 L1 评估与选择</a>
+<a class="nav-link" href="#lesson-17" data-lesson="17"><span class="nav-dot" style="background:#f59e0b"></span>构建 L2 经验沉淀</a>
+<a class="nav-link" href="#lesson-18" data-lesson="18"><span class="nav-dot" style="background:#f59e0b"></span>构建 L3 从使用到构建</a>
+<div class="nav-section">Skill篇</div>
+<a class="nav-link" href="#lesson-19" data-lesson="19"><span class="nav-dot" style="background:#ec4899"></span>Skill L1 Skill机制解析</a>
+<a class="nav-link" href="#lesson-20" data-lesson="20"><span class="nav-dot" style="background:#ec4899"></span>Skill L2 设计你的第一个Skill</a>
+<a class="nav-link" href="#lesson-21" data-lesson="21"><span class="nav-dot" style="background:#ec4899"></span>Skill L3 Skill组合与生态</a>
+<div class="nav-section">Agent篇</div>
+<a class="nav-link" href="#lesson-22" data-lesson="22"><span class="nav-dot" style="background:#06b6d4"></span>Agent L1 什么是Agent</a>
+<a class="nav-link" href="#lesson-23" data-lesson="23"><span class="nav-dot" style="background:#06b6d4"></span>Agent L2 Agent vs Skill</a>
+<a class="nav-link" href="#lesson-24" data-lesson="24"><span class="nav-dot" style="background:#06b6d4"></span>Agent L3 Agent的工作原理</a>
+<a class="nav-link" href="#lesson-25" data-lesson="25"><span class="nav-dot" style="background:#06b6d4"></span>Agent L4 Agent的应用场景</a>
+<a class="nav-link" href="#lesson-26" data-lesson="26"><span class="nav-dot" style="background:#06b6d4"></span>Agent L5 Agent的设计与构建</a>
+<a class="nav-link" href="#lesson-27" data-lesson="27"><span class="nav-dot" style="background:#06b6d4"></span>Agent L6 Agent的评估与迭代</a>
+<div class="nav-section">附录</div>
+<a class="nav-link" href="#appendix-glossary"><span class="nav-dot" style="background:#94a3b8"></span>词汇表</a>
+<a class="nav-link" href="#appendix-prompts"><span class="nav-dot" style="background:#94a3b8"></span>Prompt模板库</a>
+<a class="nav-link" href="#appendix-tools"><span class="nav-dot" style="background:#94a3b8"></span>AI工具排行</a>
+</nav>
+
+<main class="main">
+<div class="hero">
+<h1>后湖AI课</h1>
+<p>希望帮你成为AI高手。6大模块，27节系统课程，助你成为AI驱动的超级个体。</p>
+<p class="hero-signature">— 阿杰</p>
+<div class="hero-tags">
+<span class="hero-tag" style="background:#dbeafe;color:#2563eb">认知升级</span>
+<span class="hero-tag" style="background:#ede9fe;color:#7c3aed">原理通透</span>
+<span class="hero-tag" style="background:#d1fae5;color:#059669">实战技巧</span>
+<span class="hero-tag" style="background:#fef3c7;color:#d97706">动手构建</span>
+<span class="hero-tag" style="background:#fce7f3;color:#db2777">Skill生态</span>
+<span class="hero-tag" style="background:#cffafe;color:#0891b2">Agent智能</span>
+</div>
+</div>
+<div class="toc" id="toc">
+<h2>课程目录</h2>
+<div id="tocGrid"></div>
+</div>
+
+<!-- ===== 模块一：认知篇 ===== -->
+<div class="module" id="module-1">
+<div class="module-header">
+<div class="module-icon" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">一</div>
+<div><h2>认知篇</h2><p>理解AI的本质、能力边界与工作范式转变</p></div>
+</div>
+
+<!-- 认知 L1 -->
+<div class="card" id="lesson-1" style="--c:#3b82f6">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#3b82f6"></div>
+<div class="card-header">
+<div class="card-header-left">
+<span class="lesson-num" style="background:#3b82f6">L1</span>
+<h3 class="card-title">AI的四次进化</h3>
+</div>
+<div class="card-tags"><span class="card-tag">认知</span><span class="card-tag">历史</span></div>
+</div>
+<div class="card-content">
+<p>从1956年达特茅斯会议到今天的大语言模型，AI经历了四次根本性的进化。每一次进化不是简单的升级，而是<strong>范式的转换</strong>——解决问题的方式发生了本质变化。</p>
+<h3>四次进化概览</h3>
+<ul>
+<li><strong>规则驱动（1956-1980s）</strong>：专家系统，人类编写所有规则。1956年达特茅斯会议首次提出"人工智能"概念，约翰·麦卡锡、马文·明斯基等先驱奠定了AI学科基础。1966年MIT的Joseph Weizenbaum开发了ELIZA——世界上第一个聊天机器人，通过简单模式匹配模拟心理医生对话。</li>
+<li><strong>统计学习（1990s-2010s）</strong>：机器学习，从数据中发现模式。1997年IBM深蓝击败国际象棋世界冠军卡斯帕罗夫，这是AI首次在智力竞赛中战胜人类顶尖选手。2011年IBM Watson在Jeopardy!问答节目中击败两位传奇冠军。</li>
+<li><strong>深度学习（2012-2020）</strong>：神经网络，自动提取特征。2012年AlexNet在ImageNet竞赛中碾压性夺冠。2016年AlphaGo击败围棋世界冠军李世石。2017年Google发布Transformer架构论文。</li>
+<li><strong>生成式AI（2022-至今）</strong>：大语言模型，理解并创造。2022年底ChatGPT发布，两个月内用户破亿。2024年起Claude、GPT-4o、Gemini、DeepSeek等模型竞相涌现。</li>
+</ul>
+
+<div class="svg-container">
+<svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="tl-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#ec4899"/></linearGradient>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+<line x1="50" y1="110" x2="750" y2="110" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="50" y1="110" x2="750" y2="110" stroke="url(#tl-grad)" stroke-width="3" stroke-dasharray="700" stroke-dashoffset="700"><animate attributeName="stroke-dashoffset" to="0" dur="2s" fill="freeze"/></line>
+<circle cx="120" cy="110" r="20" fill="#3b82f6" opacity="0.9"/><text x="120" y="116" text-anchor="middle" fill="#fff" font-size="16">🧠</text>
+<text x="120" y="148" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="700">规则驱动</text>
+<text x="120" y="163" text-anchor="middle" fill="#64748b" font-size="9">1956-1980s</text>
+<rect x="70" y="178" width="100" height="30" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+<text x="120" y="198" text-anchor="middle" fill="#2563eb" font-size="8" font-weight="600">1950 图灵测试</text>
+<circle cx="310" cy="110" r="20" fill="#6366f1" opacity="0.9"/><text x="310" y="116" text-anchor="middle" fill="#fff" font-size="16">📊</text>
+<text x="310" y="148" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="700">统计学习</text>
+<text x="310" y="163" text-anchor="middle" fill="#64748b" font-size="9">1990s-2010s</text>
+<rect x="260" y="178" width="100" height="30" rx="6" fill="#eef2ff" stroke="#6366f1" stroke-width="1"/>
+<text x="310" y="198" text-anchor="middle" fill="#4f46e5" font-size="8" font-weight="600">1997 深蓝</text>
+<circle cx="500" cy="110" r="20" fill="#8b5cf6" opacity="0.9"/><text x="500" y="116" text-anchor="middle" fill="#fff" font-size="16">🔮</text>
+<text x="500" y="148" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="700">深度学习</text>
+<text x="500" y="163" text-anchor="middle" fill="#64748b" font-size="9">2012-2020</text>
+<rect x="450" y="178" width="100" height="30" rx="6" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1"/>
+<text x="500" y="198" text-anchor="middle" fill="#7c3aed" font-size="8" font-weight="600">2016 AlphaGo</text>
+<circle cx="690" cy="110" r="24" fill="#ec4899" opacity="0.9"/><text x="690" y="117" text-anchor="middle" fill="#fff" font-size="18">✨</text>
+<text x="690" y="148" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="700">生成式AI</text>
+<text x="690" y="163" text-anchor="middle" fill="#64748b" font-size="9">2022-至今</text>
+<text x="690" y="85" text-anchor="middle" fill="#ec4899" font-size="9" font-weight="600">大语言模型 · 我们在这里</text>
+<rect x="640" y="178" width="100" height="30" rx="6" fill="#fdf2f8" stroke="#ec4899" stroke-width="1"/>
+<text x="690" y="198" text-anchor="middle" fill="#db2777" font-size="8" font-weight="600">2022 ChatGPT</text>
+<text x="120" y="85" text-anchor="middle" fill="#64748b" font-size="9">专家系统</text>
+<text x="310" y="85" text-anchor="middle" fill="#64748b" font-size="9">数据驱动</text>
+<text x="500" y="85" text-anchor="middle" fill="#64748b" font-size="9">神经网络革命</text>
+</svg>
+<div class="svg-caption">图1-1：AI四次进化时间线 —— 从规则到生成，标注关键里程碑</div>
+</div>
+
+<h3>关键转变</h3>
+<p>前三次进化的本质是<strong>「人类定义问题，机器优化解法」</strong>。而第四次进化的本质是<strong>「AI理解意图，自主生成方案」</strong>。这意味着人机关系从「工具」变成了「协作者」。</p>
+
+<div class="callout">
+<div class="callout-title">💡 历史上的关键时刻</div>
+<p><strong>1950年</strong> —— 阿兰·图灵发表论文，提出"图灵测试"：如果一台机器能在对话中让人无法分辨它是人还是机器，就可以认为它具有智能。</p>
+<p><strong>1997年5月11日</strong> —— IBM"深蓝"以3.5:2.5击败国际象棋世界冠军卡斯帕罗夫，证明在规则明确的领域机器可战胜人类最强智慧。</p>
+<p><strong>2016年3月15日</strong> —— AlphaGo以4:1击败围棋世界冠军李世石，攻克了此前被认为"十年内不可能"的难题。</p>
+<p><strong>2022年11月30日</strong> —— ChatGPT发布，两个月内用户突破1亿，成为史上增长最快的消费级应用。</p>
+</div>
+
+<div class="learning-goals">
+<h4>学习目标</h4>
+<ul>
+<li>理解AI四代范式的核心区别</li>
+<li>认识到当前生成式AI的历史定位</li>
+<li>理解为什么这次AI浪潮与以往不同</li>
+<li>了解每个时代的标志性事件与代表人物</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- 认知 L2 -->
+<div class="card" id="lesson-2">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#3b82f6"></div>
+<div class="card-header">
+<div class="card-header-left">
+<span class="lesson-num" style="background:#3b82f6">L2</span>
+<h3 class="card-title">AI能做什么与不能做什么</h3>
+</div>
+<div class="card-tags"><span class="card-tag">认知</span><span class="card-tag">能力边界</span></div>
+</div>
+<div class="card-content">
+<p>正确理解AI的能力边界，是高效使用AI的前提。<strong>高估AI导致失望，低估AI导致错失机会。</strong></p>
+<h3>AI能力象限</h3>
+<div class="svg-container">
+<svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="q1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#10b981" stop-opacity="0.15"/><stop offset="100%" stop-color="#10b981" stop-opacity="0.05"/></linearGradient>
+<linearGradient id="q2" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.15"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.05"/></linearGradient>
+<linearGradient id="q3" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.15"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.05"/></linearGradient>
+<linearGradient id="q4" x1="1" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.15"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0.05"/></linearGradient></defs>
+<line x1="250" y1="40" x2="250" y2="380" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="60" y1="210" x2="440" y2="210" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="250" y="400" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600">创造性 ← → 重复性</text>
+<text x="30" y="215" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600" transform="rotate(-90,30,215)">不擅长 ← → 擅长</text>
+<rect x="60" y="40" width="190" height="170" rx="8" fill="url(#q1)"/>
+<rect x="250" y="40" width="190" height="170" rx="8" fill="url(#q2)"/>
+<rect x="60" y="210" width="190" height="170" rx="8" fill="url(#q3)"/>
+<rect x="250" y="210" width="190" height="170" rx="8" fill="url(#q4)"/>
+<text x="155" y="65" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">⭐ 最佳使用区</text>
+<text x="155" y="95" text-anchor="middle" fill="#334155" font-size="11">文案创作</text>
+<text x="155" y="115" text-anchor="middle" fill="#334155" font-size="11">方案设计</text>
+<text x="155" y="135" text-anchor="middle" fill="#334155" font-size="11">代码编写</text>
+<text x="155" y="155" text-anchor="middle" fill="#334155" font-size="11">数据分析</text>
+<text x="155" y="175" text-anchor="middle" fill="#334155" font-size="11">头脑风暴</text>
+<text x="345" y="65" text-anchor="middle" fill="#3b82f6" font-size="13" font-weight="700">✅ 高效替代区</text>
+<text x="345" y="95" text-anchor="middle" fill="#334155" font-size="11">格式转换</text>
+<text x="345" y="115" text-anchor="middle" fill="#334155" font-size="11">信息提取</text>
+<text x="345" y="135" text-anchor="middle" fill="#334155" font-size="11">翻译校对</text>
+<text x="345" y="155" text-anchor="middle" fill="#334155" font-size="11">摘要生成</text>
+<text x="345" y="175" text-anchor="middle" fill="#334155" font-size="11">批量处理</text>
+<text x="155" y="240" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">⚠️ 需要人类把关</text>
+<text x="155" y="270" text-anchor="middle" fill="#334155" font-size="11">战略决策</text>
+<text x="155" y="290" text-anchor="middle" fill="#334155" font-size="11">价值判断</text>
+<text x="155" y="310" text-anchor="middle" fill="#334155" font-size="11">人际沟通</text>
+<text x="155" y="330" text-anchor="middle" fill="#334155" font-size="11">创新突破</text>
+<text x="345" y="240" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="700">❌ 双输区</text>
+<text x="345" y="270" text-anchor="middle" fill="#334155" font-size="11">精确计算</text>
+<text x="345" y="290" text-anchor="middle" fill="#334155" font-size="11">实时操作</text>
+<text x="345" y="310" text-anchor="middle" fill="#334155" font-size="11">物理交互</text>
+</svg>
+<div class="svg-caption">图2-1：AI能力象限图 —— 找到最佳使用区</div>
+</div>
+
+<h3>AI擅长什么？—— 具体案例</h3>
+<ul>
+<li><strong>文案创作</strong>：营销团队用AI根据产品卖点一键生成10种风格的广告文案，人工只需挑选微调，效率提升5倍。</li>
+<li><strong>数据分析</strong>：产品经理将十万条用户反馈丢给AI，5分钟内获得分类统计和关键洞察，过去需要数据分析师花一周。</li>
+<li><strong>代码编写</strong>：开发者描述需求后AI生成初始代码框架，开发速度提升3-4倍。</li>
+<li><strong>翻译校对</strong>：跨国团队用AI实时翻译会议纪要，准确率95%以上。</li>
+</ul>
+
+<h3>AI为什么不擅长？—— 深层原因</h3>
+<ul>
+<li><strong>战略决策</strong>：AI缺乏对商业环境、组织政治、长期趋势的综合判断力。没有"经历过"市场崩盘或团队危机。</li>
+<li><strong>价值判断</strong>：什么是"好的"设计？什么是"正确"的道德选择？需要人类价值观和社会共识。</li>
+<li><strong>精确计算</strong>：LLM本质是概率模型，不是计算器。涉及财务、法律等需要100%准确的场景必须人工验证。</li>
+<li><strong>物理交互</strong>：AI无法替你拧螺丝、做实验、签合同。需要物理世界行动的任务AI只能提供建议。</li>
+</ul>
+
+<h3>AI能力雷达图</h3>
+<div class="svg-container">
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="radar-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.25"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.15"/></linearGradient></defs>
+<polygon points="250,80 410,170 410,330 250,420 90,330 90,170" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<polygon points="250,130 365,195 365,305 250,370 135,305 135,195" fill="none" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<polygon points="250,180 320,220 320,280 250,320 180,280 180,220" fill="none" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+<line x1="250" y1="80" x2="250" y2="420" stroke="#e2e8f0" stroke-width="0.5"/>
+<line x1="90" y1="170" x2="410" y2="330" stroke="#e2e8f0" stroke-width="0.5"/>
+<line x1="410" y1="170" x2="90" y2="330" stroke="#e2e8f0" stroke-width="0.5"/>
+<polygon points="250,95 390,190 380,310 250,395 130,290 125,195" fill="url(#radar-fill)" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="250" cy="95" r="4" fill="#3b82f6"/><circle cx="390" cy="190" r="4" fill="#3b82f6"/><circle cx="380" cy="310" r="4" fill="#3b82f6"/><circle cx="250" cy="395" r="4" fill="#3b82f6"/><circle cx="130" cy="290" r="4" fill="#3b82f6"/><circle cx="125" cy="195" r="4" fill="#3b82f6"/>
+<text x="250" y="65" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="600">文本生成 (95%)</text>
+<text x="425" y="175" text-anchor="start" fill="#1e293b" font-size="12" font-weight="600">信息检索 (85%)</text>
+<text x="425" y="335" text-anchor="start" fill="#1e293b" font-size="12" font-weight="600">代码生成 (80%)</text>
+<text x="250" y="445" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="600">精确推理 (45%)</text>
+<text x="75" y="335" text-anchor="end" fill="#1e293b" font-size="12" font-weight="600">战略决策 (25%)</text>
+<text x="75" y="175" text-anchor="end" fill="#1e293b" font-size="12" font-weight="600">物理操作 (10%)</text>
+</svg>
+<div class="svg-caption">图2-2：AI能力雷达图 —— 不同维度的能力表现差异巨大</div>
+</div>
+
+<h3>核心认知</h3>
+<ul>
+<li>AI是一个<strong>概率引擎</strong>，不是计算器</li>
+<li>AI的「幻觉」不是bug，是其工作原理的<strong>固有特征</strong></li>
+<li>AI擅长<strong>模式匹配</strong>，不擅长<strong>因果推理</strong></li>
+<li>AI没有真正的<strong>理解</strong>，但有强大的<strong>表现</strong>能力</li>
+</ul>
+<div class="learning-goals">
+<h4>学习目标</h4>
+<ul>
+<li>建立对AI能力的客观认知</li>
+<li>学会用象限思维判断任务是否适合AI</li>
+<li>理解AI幻觉的本质和应对策略</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- 认知 L3 -->
+<div class="card" id="lesson-3">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#3b82f6"></div>
+<div class="card-header">
+<div class="card-header-left">
+<span class="lesson-num" style="background:#3b82f6">L3</span>
+<h3 class="card-title">从AI工具到AI驱动工作</h3>
+</div>
+<div class="card-tags"><span class="card-tag">认知</span><span class="card-tag">范式</span></div>
+</div>
+<div class="card-content">
+<p>「AI驱动工作」不只是用AI工具辅助完成任务，而是一种<strong>全新的工作范式</strong>：以AI为核心引擎，重新设计每一个工作流程。</p>
+<h3>步兵 vs 飞行员：比喻详解</h3>
+<p>想象一座城市需要从A点运送物资到B点。<strong>步兵</strong>自己背着包走路——传统工作方式，每一步都是体力活。<strong>飞行员</strong>驾驶直升机——你制定航线、按下按钮，直升机（AI）负责执行飞行。你不需要会飞，你只需要知道目的地在哪。核心区别：步兵的能力上限取决于个人体力极限，飞行员的能力上限取决于工具性能。飞行员可以同时协调多架无人机。</p>
+<div class="svg-container">
+<svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#94a3b8"/></marker>
+<marker id="arr-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#10b981"/></marker></defs>
+<rect x="30" y="20" width="640" height="130" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+<text x="50" y="48" fill="#64748b" font-size="13" font-weight="600">传统工作流（步兵模式）</text>
+<rect x="50" y="65" width="90" height="36" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/><text x="95" y="88" text-anchor="middle" fill="#64748b" font-size="11">人工思考</text>
+<line x1="140" y1="83" x2="175" y2="83" stroke="#94a3b8" marker-end="url(#arr-b)"/>
+<rect x="175" y="65" width="90" height="36" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/><text x="220" y="88" text-anchor="middle" fill="#64748b" font-size="11">手动执行</text>
+<line x1="265" y1="83" x2="300" y2="83" stroke="#94a3b8" marker-end="url(#arr-b)"/>
+<rect x="300" y="65" width="90" height="36" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/><text x="345" y="88" text-anchor="middle" fill="#64748b" font-size="11">反复修改</text>
+<line x1="390" y1="83" x2="425" y2="83" stroke="#94a3b8" marker-end="url(#arr-b)"/>
+<rect x="425" y="65" width="90" height="36" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/><text x="470" y="88" text-anchor="middle" fill="#64748b" font-size="11">人工审查</text>
+<line x1="515" y1="83" x2="550" y2="83" stroke="#94a3b8" marker-end="url(#arr-b)"/>
+<rect x="550" y="65" width="90" height="36" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/><text x="595" y="88" text-anchor="middle" fill="#64748b" font-size="11">交付结果</text>
+<text x="350" y="130" text-anchor="middle" fill="#94a3b8" font-size="11">🧑 人工主导，线性推进，能力上限=个人极限</text>
+<rect x="30" y="180" width="640" height="140" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+<text x="50" y="208" fill="#10b981" font-size="13" font-weight="600">AI驱动工作流（飞行员模式）</text>
+<rect x="50" y="225" width="90" height="36" rx="8" fill="#10b981"/><text x="95" y="248" text-anchor="middle" fill="#fff" font-size="11">🤖 AI初稿</text>
+<line x1="140" y1="243" x2="175" y2="243" stroke="#10b981" marker-end="url(#arr-g)"/>
+<rect x="175" y="225" width="90" height="36" rx="8" fill="#10b981"/><text x="220" y="248" text-anchor="middle" fill="#fff" font-size="11">🧑 评审</text>
+<line x1="265" y1="243" x2="300" y2="243" stroke="#10b981" marker-end="url(#arr-g)"/>
+<rect x="300" y="225" width="90" height="36" rx="8" fill="#10b981"/><text x="345" y="248" text-anchor="middle" fill="#fff" font-size="11">🤖 AI迭代</text>
+<line x1="390" y1="243" x2="425" y2="243" stroke="#10b981" marker-end="url(#arr-g)"/>
+<rect x="425" y="225" width="90" height="36" rx="8" fill="#10b981"/><text x="470" y="248" text-anchor="middle" fill="#fff" font-size="11">🧑 精调</text>
+<line x1="515" y1="243" x2="550" y2="243" stroke="#10b981" marker-end="url(#arr-g)"/>
+<rect x="550" y="225" width="90" height="36" rx="8" fill="#10b981"/><text x="595" y="248" text-anchor="middle" fill="#fff" font-size="11">✅ 交付</text>
+<text x="350" y="295" text-anchor="middle" fill="#059669" font-size="11">🤖⇄🧑 人机协作，能力上限=AI能力×编排智慧</text>
+</svg>
+<div class="svg-caption">图3-1：传统工作流 vs AI驱动工作流</div>
+</div>
+
+<h3>人机协作循环</h3>
+<div class="svg-container">
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#3b82f6"/></marker>
+<marker id="arr-loop-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#10b981"/></marker></defs>
+<text x="300" y="30" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="700">人机协作循环</text>
+<rect x="200" y="55" width="200" height="50" rx="25" fill="#3b82f6"/><text x="300" y="85" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">🧑 人类：定义意图+审核</text>
+<line x1="300" y1="105" x2="300" y2="140" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr-loop)"/>
+<text x="320" y="128" fill="#3b82f6" font-size="10" font-weight="600">下达指令</text>
+<rect x="200" y="140" width="200" height="50" rx="25" fill="#10b981"/><text x="300" y="170" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">🤖 AI：理解+生成+执行</text>
+<line x1="300" y1="190" x2="300" y2="225" stroke="#10b981" stroke-width="2" marker-end="url(#arr-loop-g)"/>
+<text x="320" y="213" fill="#10b981" font-size="10" font-weight="600">输出结果</text>
+<rect x="200" y="225" width="200" height="50" rx="25" fill="#f59e0b"/><text x="300" y="255" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">📋 双方：评审+反馈</text>
+<path d="M200,250 Q100,250 100,175 Q100,80 200,80" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr-loop)"/>
+<text x="80" y="175" fill="#f59e0b" font-size="10" font-weight="600" transform="rotate(-90,80,175)">迭代优化</text>
+<rect x="30" y="310" width="160" height="70" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+<text x="110" y="332" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">人类核心价值</text>
+<text x="110" y="352" text-anchor="middle" fill="#334155" font-size="9">判断力 · 创造力 · 同理心</text>
+<text x="110" y="368" text-anchor="middle" fill="#334155" font-size="9">责任感 · 战略思维</text>
+<rect x="220" y="310" width="160" height="70" rx="10" fill="#f0fdf4" stroke="#10b981" stroke-width="1"/>
+<text x="300" y="332" text-anchor="middle" fill="#059669" font-size="11" font-weight="600">AI核心价值</text>
+<text x="300" y="352" text-anchor="middle" fill="#334155" font-size="9">速度 · 规模 · 一致性</text>
+<text x="300" y="368" text-anchor="middle" fill="#334155" font-size="9">知识广度 · 模式识别</text>
+<rect x="410" y="310" width="160" height="70" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+<text x="490" y="332" text-anchor="middle" fill="#d97706" font-size="11" font-weight="600">协作关键</text>
+<text x="490" y="352" text-anchor="middle" fill="#334155" font-size="9">清晰指令 · 及时反馈</text>
+<text x="490" y="368" text-anchor="middle" fill="#334155" font-size="9">信任验证 · 持续迭代</text>
+</svg>
+<div class="svg-caption">图3-2：人机协作循环 —— 意图→生成→评审→迭代的闭环</div>
+</div>
+
+<h3>三个关键转变</h3>
+<ol>
+<li><strong>角色转变</strong>：从「执行者」变成「指挥官」</li>
+<li><strong>流程转变</strong>：从「串行」变成「并行」</li>
+<li><strong>能力转变</strong>：从「专业技能」变成「AI素养」</li>
+</ol>
+
+<div class="callout tip">
+<div class="callout-title">🏢 真实企业AI应用案例</div>
+<p><strong>案例1：电商客服AI化</strong> —— 用AI处理70%常见咨询，准确率92%。客服团队从50人缩减到15人，客户满意度反升8%。</p>
+<p><strong>案例2：律所合同审查自动化</strong> —— AI在30分钟内审完50页合同并标记风险条款，原本需3小时缩短到50分钟。</p>
+<p><strong>案例3：制造企业质检升级</strong> —— 多模态AI分析产品照片，0.1秒识别微小瑕疵，准确率99.6%，7x24小时不间断工作。</p>
+</div>
+
+<div class="learning-goals">
+<h4>学习目标</h4>
+<ul>
+<li>理解AI驱动工作的核心概念</li>
+<li>对比传统工作流与AI驱动工作流的区别</li>
+<li>开始用AI驱动思维重新审视自己的工作</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- AI Model Panorama Special Card -->
+<div class="special-card" id="ai-panorama">
+<h2>🌍 2026主流AI大模型全景图</h2>
+<p>了解当前AI模型的能力格局，帮助你为不同场景选择最合适的模型。</p>
+<h3 style="font-size:18px;color:#1e293b;margin:24px 0 12px">国际四大模型</h3>
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>模型</th><th>厂商</th><th>当前主力</th><th>参考价(输入/输出)</th><th>核心优势</th><th>最适合场景</th></tr></thead>
+<tbody>
+<tr><td><strong>Claude Opus 4.8</strong></td><td>Anthropic</td><td>Opus 4.8 / Sonnet 4.6</td><td class="price">$5 / $25</td><td>编程能力领先、Agent最强</td><td>复杂代码、长程Agent任务</td></tr>
+<tr><td><strong>GPT-5.5</strong></td><td>OpenAI</td><td>GPT-5.5 / GPT-5.4</td><td class="price">$5 / $30</td><td>综合最均衡、生态最成熟</td><td>通用生产、工具生态</td></tr>
+<tr><td><strong>Gemini 3.5</strong></td><td>Google</td><td>Gemini 3.5 Flash</td><td class="price">$1.5 / $9</td><td>长文档、多模态、高吞吐</td><td>长文档分析、多模态</td></tr>
+<tr><td><strong>Grok 4.3</strong></td><td>xAI</td><td>Grok 4.3</td><td class="price">$1.25 / $2.5</td><td>实时信息、极致性价比</td><td>实时信息、舆情分析</td></tr>
+</tbody>
+</table>
+</div>
+<h3 style="font-size:18px;color:#1e293b;margin:28px 0 12px">国产模型</h3>
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>模型</th><th>厂商</th><th>参考价</th><th>核心优势</th><th>最适合场景</th></tr></thead>
+<tbody>
+<tr><td><strong>DeepSeek V4</strong></td><td>深度求索</td><td class="price">$0.14~$0.87/百万token</td><td>数学推理顶尖、开源、超低价</td><td>数理科研、私有部署</td></tr>
+<tr><td><strong>通义千问 Qwen3.5</strong></td><td>阿里</td><td class="price">分档计价</td><td>产品线完整、开源生态丰富</td><td>均衡工程、开源生态</td></tr>
+<tr><td><strong>GLM-5.2</strong></td><td>智谱AI</td><td class="price">$1.4 / $4.4</td><td>国产代码能力突出</td><td>国产工程与代码任务</td></tr>
+<tr><td><strong>Kimi K2.6</strong></td><td>月之暗面</td><td class="price">分档计价</td><td>长文档、多模态</td><td>长文档分析、代码智能体</td></tr>
+<tr><td><strong>豆包 Seed 2.0</strong></td><td>字节跳动</td><td class="price">分档计价</td><td>多模态最强、C端体验最佳</td><td>多模态创作、大众产品</td></tr>
+<tr><td><strong>文心 5.1</strong></td><td>百度</td><td class="price">约¥4/¥18(32K内)</td><td>中文理解扎实、合规最强</td><td>政务金融、中文创作</td></tr>
+</tbody>
+</table>
+</div>
+<h3 style="font-size:18px;color:#1e293b;margin:28px 0 12px">模型选择路线图</h3>
+<div class="svg-container" style="padding:32px">
+<svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+<rect x="260" y="10" width="200" height="40" rx="20" fill="#3b82f6"/><text x="360" y="35" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">你的任务是什么？</text>
+<line x1="310" y1="50" x2="80" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="360" y1="50" x2="240" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="390" y1="50" x2="420" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="430" y1="50" x2="580" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="450" y1="50" x2="680" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="20" y="90" width="120" height="36" rx="18" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/><text x="80" y="113" text-anchor="middle" fill="#2563eb" font-size="12" font-weight="600">写代码</text>
+<rect x="180" y="90" width="120" height="36" rx="18" fill="#eff6ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="240" y="113" text-anchor="middle" fill="#7c3aed" font-size="12" font-weight="600">长文档</text>
+<rect x="350" y="90" width="140" height="36" rx="18" fill="#eff6ff" stroke="#10b981" stroke-width="1.5"/><text x="420" y="113" text-anchor="middle" fill="#059669" font-size="12" font-weight="600">日常办公</text>
+<rect x="520" y="90" width="120" height="36" rx="18" fill="#eff6ff" stroke="#f59e0b" stroke-width="1.5"/><text x="580" y="113" text-anchor="middle" fill="#d97706" font-size="12" font-weight="600">数学科研</text>
+<rect x="620" y="90" width="90" height="36" rx="18" fill="#eff6ff" stroke="#ec4899" stroke-width="1.5"/><text x="665" y="113" text-anchor="middle" fill="#db2777" font-size="12" font-weight="600">实时信息</text>
+<line x1="50" y1="126" x2="30" y2="170" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="110" y1="126" x2="140" y2="170" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)"/>
+<rect x="0" y="170" width="110" height="32" rx="8" fill="#fff" stroke="#3b82f6"/><text x="55" y="191" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="600">Claude Opus</text>
+<rect x="110" y="170" width="110" height="32" rx="8" fill="#fff" stroke="#3b82f6"/><text x="165" y="191" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="600">DeepSeek V4</text>
+<line x1="220" y1="126" x2="200" y2="170" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="260" y1="126" x2="300" y2="170" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)"/>
+<rect x="150" y="215" width="100" height="32" rx="8" fill="#fff" stroke="#8b5cf6"/><text x="200" y="236" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="600">Gemini Flash</text>
+<rect x="260" y="215" width="100" height="32" rx="8" fill="#fff" stroke="#8b5cf6"/><text x="310" y="236" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="600">Kimi K2.6</text>
+<rect x="375" y="170" width="110" height="32" rx="8" fill="#fff" stroke="#10b981"/><text x="430" y="191" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="600">豆包/文心(免费)</text>
+<rect x="535" y="170" width="110" height="32" rx="8" fill="#fff" stroke="#f59e0b"/><text x="590" y="191" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="600">DeepSeek V4-Pro</text>
+<rect x="620" y="170" width="80" height="32" rx="8" fill="#fff" stroke="#ec4899"/><text x="660" y="191" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="600">Grok</text>
+<text x="360" y="290" text-anchor="middle" fill="#64748b" font-size="12">💡 日常探索可先用免费模型，复杂任务再升级到付费模型</text>
+<text x="360" y="310" text-anchor="middle" fill="#64748b" font-size="11">多模型组合使用往往比单模型效果更好</text>
+</svg>
+<div class="svg-caption">图：AI模型选择决策路线图</div>
+</div>
+</div>
+</div><!-- end module-1 -->
+
+<!-- ===== 模块二：原理篇 ===== -->
+<div class="module" id="module-2">
+<div class="module-header">
+<div class="module-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">二</div>
+<div><h2>原理篇</h2><p>理解AI背后的技术原理，让使用更高效</p></div>
+</div>
+
+<!-- 原理 L1 (原lesson-4) -->
+<div class="card" id="lesson-4">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#8b5cf6"></div>
+<div class="card-header">
+<div class="card-header-left">
+<span class="lesson-num" style="background:#8b5cf6">L1</span>
+<h3 class="card-title">语言的本质是数学</h3>
+</div>
+<div class="card-tags"><span class="card-tag">原理</span><span class="card-tag">词向量</span></div>
+</div>
+<div class="card-content">
+<p>计算机如何理解语言？答案是：<strong>把语言变成数字</strong>。词向量（Word Embedding）是将每个词映射为高维空间中的一个点，语义相近的词距离也相近。</p>
+<div class="svg-container">
+<svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="vec-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ede9fe" stop-opacity="0.5"/><stop offset="100%" stop-color="#eff6ff" stop-opacity="0.3"/></linearGradient></defs>
+<rect x="40" y="20" width="520" height="300" rx="16" fill="url(#vec-bg)" stroke="#e2e8f0"/>
+<text x="60" y="46" fill="#8b5cf6" font-size="12" font-weight="600">词向量空间（3D投影示意）</text>
+<line x1="80" y1="280" x2="520" y2="280" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="80" y1="280" x2="80" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+<circle cx="180" cy="160" r="28" fill="#8b5cf6" opacity="0.2"/><text x="180" y="165" text-anchor="middle" fill="#7c3aed" font-size="13" font-weight="600">国王</text>
+<circle cx="340" cy="200" r="28" fill="#3b82f6" opacity="0.2"/><text x="340" y="205" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="600">男人</text>
+<circle cx="280" cy="100" r="28" fill="#ec4899" opacity="0.2"/><text x="280" y="105" text-anchor="middle" fill="#db2777" font-size="13" font-weight="600">女人</text>
+<circle cx="440" cy="140" r="28" fill="#f59e0b" opacity="0.2"/><text x="440" y="145" text-anchor="middle" fill="#d97706" font-size="13" font-weight="600">王后</text>
+<line x1="200" y1="170" x2="325" y2="195" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="255" y="185" text-anchor="middle" fill="#64748b" font-size="10">性别方向</text>
+<line x1="295" y1="110" x2="425" y2="135" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
+<rect x="150" y="240" width="300" height="40" rx="10" fill="#fff" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="300" y="266" text-anchor="middle" fill="#7c3aed" font-size="14" font-weight="700">国王 − 男人 + 女人 ≈ 王后</text>
+<text x="300" y="310" text-anchor="middle" fill="#64748b" font-size="11">词向量间的算术运算保留了语义关系</text>
+</svg>
+<div class="svg-caption">图4-1：词向量空间 —— "国王-男人+女人=王后" 的数学直觉</div>
+</div>
+
+<h3>Token计算实例</h3>
+<p>大模型处理文本时以<strong>Token</strong>为单位。一个Token可能是一个字、一个词、甚至一个标点。</p>
+<div class="svg-container">
+<svg viewBox="0 0 680 120" xmlns="http://www.w3.org/2000/svg">
+<text x="20" y="25" fill="#8b5cf6" font-size="12" font-weight="600">句子 → Token 拆分实例</text>
+<rect x="60" y="38" width="600" height="28" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+<text x="70" y="58" fill="#1e293b" font-size="14" font-weight="500">人工智能正在改变我们的工作方式</text>
+<text x="20" y="90" fill="#334155" font-size="14">Token：</text>
+<rect x="40" y="75" width="80" height="28" rx="6" fill="#eff6ff" stroke="#3b82f6"/><text x="80" y="94" text-anchor="middle" fill="#2563eb" font-size="12">人工</text>
+<rect x="125" y="75" width="80" height="28" rx="6" fill="#ede9fe" stroke="#8b5cf6"/><text x="165" y="94" text-anchor="middle" fill="#7c3aed" font-size="12">智能</text>
+<rect x="210" y="75" width="60" height="28" rx="6" fill="#fce7f3" stroke="#ec4899"/><text x="240" y="94" text-anchor="middle" fill="#db2777" font-size="12">正在</text>
+<rect x="275" y="75" width="60" height="28" rx="6" fill="#fef3c7" stroke="#f59e0b"/><text x="305" y="94" text-anchor="middle" fill="#d97706" font-size="12">改变</text>
+<rect x="340" y="75" width="60" height="28" rx="6" fill="#d1fae5" stroke="#10b981"/><text x="370" y="94" text-anchor="middle" fill="#059669" font-size="12">我们</text>
+<rect x="405" y="75" width="60" height="28" rx="6" fill="#fef2f2" stroke="#ef4444"/><text x="435" y="94" text-anchor="middle" fill="#dc2626" font-size="12">的</text>
+<rect x="470" y="75" width="60" height="28" rx="6" fill="#eff6ff" stroke="#3b82f6"/><text x="500" y="94" text-anchor="middle" fill="#2563eb" font-size="12">工作</text>
+<rect x="535" y="75" width="80" height="28" rx="6" fill="#ede9fe" stroke="#8b5cf6"/><text x="575" y="94" text-anchor="middle" fill="#7c3aed" font-size="12">方式</text>
+</svg>
+<div class="svg-caption">图4-2：一句话如何被拆分为8个Token</div>
+</div>
+
+<h3>注意力机制简介</h3>
+<p>Transformer的核心是<strong>注意力机制</strong>。当模型读到"苹果"这个词时，注意力机制让它关注上下文中与"苹果"最相关的词。比如"我吃了一个红色的苹果"中，"苹果"会重点关注"吃"和"红色"。</p>
+<div class="svg-container">
+<svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-attn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#8b5cf6"/></marker></defs>
+<text x="30" y="28" fill="#8b5cf6" font-size="13" font-weight="600">注意力机制示意图</text>
+<text x="80" y="75" text-anchor="middle" fill="#64748b" font-size="12">我</text>
+<text x="180" y="75" text-anchor="middle" fill="#64748b" font-size="12">吃</text>
+<text x="280" y="75" text-anchor="middle" fill="#64748b" font-size="12">了</text>
+<text x="380" y="75" text-anchor="middle" fill="#64748b" font-size="12">一个</text>
+<text x="480" y="75" text-anchor="middle" fill="#8b5cf6" font-size="13" font-weight="700">苹果</text>
+<circle cx="80" cy="65" r="20" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+<circle cx="180" cy="65" r="20" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+<circle cx="280" cy="65" r="20" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+<circle cx="380" cy="65" r="20" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+<circle cx="480" cy="65" r="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+<line x1="480" y1="85" x2="190" y2="85" stroke="#3b82f6" stroke-width="4" opacity="0.7" marker-end="url(#arr-attn)"/>
+<text x="335" y="100" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="600">权重 0.35（"吃"）</text>
+<line x1="465" y1="85" x2="385" y2="85" stroke="#10b981" stroke-width="2" opacity="0.5"/>
+<rect x="60" y="130" width="210" height="18" rx="4" fill="#3b82f6" opacity="0.7"/><text x="165" y="143" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">吃 (35%)</text>
+<rect x="274" y="130" width="90" height="18" rx="4" fill="#10b981" opacity="0.5"/><text x="319" y="143" text-anchor="middle" fill="#fff" font-size="9">一个 (15%)</text>
+<rect x="368" y="130" width="60" height="18" rx="4" fill="#f59e0b" opacity="0.4"/><text x="398" y="143" text-anchor="middle" fill="#fff" font-size="9">我 (10%)</text>
+<rect x="432" y="130" width="60" height="18" rx="4" fill="#64748b" opacity="0.3"/><text x="462" y="143" text-anchor="middle" fill="#fff" font-size="9">了 (8%)</text>
+<text x="60" y="180" fill="#64748b" font-size="10">💡 "苹果"最关注"吃"——因为它决定了苹果的语义角色（食物而非品牌）</text>
+</svg>
+<div class="svg-caption">图4-3：注意力机制 —— 模型如何理解"苹果"与上下文的关系</div>
+</div>
+<h3>核心要点</h3>
+<ul>
+<li>每个词被表示为一个<strong>高维向量</strong>（通常数百到数千维）</li>
+<li>语义相似的词在向量空间中<strong>距离相近</strong></li>
+<li>向量之间的<strong>算术运算</strong>可以捕捉语义关系</li>
+<li>这是大语言模型理解语言的基础</li>
+</ul>
+<div class="learning-goals">
+<h4>学习目标</h4>
+<ul>
+<li>理解词向量的核心概念</li>
+<li>了解Token拆分的实际过程</li>
+<li>初步理解注意力机制</li>
+<li>为理解大模型的工作原理打下基础</li>
+</ul>
+</div>
+</div>
+
+<!-- 原理 L2 (原lesson-5) -->
+<div class="card" id="lesson-5">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#8b5cf6"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#8b5cf6">L2</span><h3 class="card-title">大模型的诞生</h3></div>
+<div class="card-tags"><span class="card-tag">原理</span><span class="card-tag">Scaling Law</span></div></div>
+<div class="card-content">
+<p>从早期的几百万参数到如今的<strong>万亿参数</strong>，大模型的能力增长遵循<strong>Scaling Law</strong>——更多的参数、数据、算力，带来近乎线性的能力提升。</p>
+<div class="svg-container">
+<svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bar1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient>
+<linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#818cf8"/></linearGradient>
+<linearGradient id="bar3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient>
+<linearGradient id="bar4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#c084fc"/></linearGradient>
+<linearGradient id="bar5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#d946ef"/><stop offset="100%" stop-color="#e879f9"/></linearGradient></defs>
+<text x="30" y="40" fill="#8b5cf6" font-size="12" font-weight="600">参数规模对比（对数刻度）</text>
+<rect x="140" y="50" width="4" height="32" rx="2" fill="url(#bar1)"/><text x="148" y="72" fill="#334155" font-size="11">LeNet</text><text x="148" y="86" fill="#64748b" font-size="9">6万 (1998)</text>
+<rect x="140" y="100" width="10" height="32" rx="2" fill="url(#bar2)"/><text x="154" y="122" fill="#334155" font-size="11">AlexNet</text><text x="154" y="136" fill="#64748b" font-size="9">6000万 (2012)</text>
+<rect x="140" y="150" width="60" height="32" rx="2" fill="url(#bar3)"/><text x="204" y="172" fill="#334155" font-size="11">BERT-Large</text><text x="204" y="186" fill="#64748b" font-size="9">3.4亿 (2018)</text>
+<rect x="140" y="200" width="200" height="32" rx="2" fill="url(#bar4)"/><text x="344" y="222" fill="#334155" font-size="11">GPT-3</text><text x="344" y="236" fill="#64748b" font-size="9">1750亿 (2020)</text>
+<rect x="140" y="248" width="380" height="32" rx="2" fill="url(#bar5)"/><text x="524" y="270" fill="#334155" font-size="11">GPT-4</text><text x="524" y="284" fill="#64748b" font-size="9">~1.8万亿 (2023)</text>
+</svg>
+<div class="svg-caption">图5-1：参数规模爆炸式增长</div>
+</div>
+<h3>训练过程 —— "批改作业"比喻</h3>
+<ul>
+<li><strong>准备教材</strong>：收集互联网上海量文本（维基百科、新闻、书籍、代码）</li>
+<li><strong>做作业</strong>：给模型前半段文字，让它预测下一个字</li>
+<li><strong>批改打分</strong>：标准答案是原文下一个字，猜对了强化，猜错了调整（反向传播）</li>
+<li><strong>重复数十亿轮</strong>：模型在万亿Token上重复此过程，获得极深"语感"</li>
+</ul>
+<h3>Scaling Law 的三个维度</h3>
+<ul>
+<li><strong>参数规模</strong>：模型越大，能力越强</li>
+<li><strong>训练数据</strong>：数据越多，理解越深</li>
+<li><strong>计算量</strong>：算力投入与能力提升正相关</li>
+</ul>
+<p>关键发现：持续增加投入，模型的<strong>涌现能力</strong>不断出现——小模型完全不具备、大模型突然获得的能力。</p>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解参数规模与模型能力的关系</li><li>掌握Scaling Law的核心思想</li><li>理解"涌现能力"的概念</li></ul></div>
+</div>
+</div>
+
+<!-- 原理 L3 (原lesson-6) -->
+<div class="card" id="lesson-6">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#8b5cf6"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#8b5cf6">L3</span><h3 class="card-title">LLM是如何工作的</h3></div>
+<div class="card-tags"><span class="card-tag">原理</span><span class="card-tag">Token</span><span class="card-tag">Temperature</span></div></div>
+<div class="card-content">
+<p>大语言模型的核心工作方式是<strong>逐Token预测</strong>：给定前面的文本，预测下一个最可能出现的词。</p>
+<div class="svg-container">
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#3b82f6"/></marker></defs>
+<text x="30" y="30" fill="#8b5cf6" font-size="13" font-weight="600">逐Token预测流程</text>
+<rect x="40" y="50" width="65" height="35" rx="8" fill="#eff6ff" stroke="#3b82f6"/><text x="72" y="73" text-anchor="middle" fill="#2563eb" font-size="13">今天</text>
+<line x1="105" y1="67" x2="125" y2="67" stroke="#3b82f6" marker-end="url(#arr2)"/>
+<rect x="125" y="50" width="65" height="35" rx="8" fill="#eff6ff" stroke="#3b82f6"/><text x="157" y="73" text-anchor="middle" fill="#2563eb" font-size="13">天气</text>
+<line x1="190" y1="67" x2="210" y2="67" stroke="#3b82f6" marker-end="url(#arr2)"/>
+<rect x="210" y="50" width="65" height="35" rx="8" fill="#eff6ff" stroke="#3b82f6"/><text x="242" y="73" text-anchor="middle" fill="#2563eb" font-size="13">真</text>
+<line x1="275" y1="67" x2="295" y2="67" stroke="#3b82f6" marker-end="url(#arr2)"/>
+<rect x="295" y="50" width="65" height="35" rx="8" fill="#eff6ff" stroke="#3b82f6"/><text x="327" y="73" text-anchor="middle" fill="#2563eb" font-size="13">不错</text>
+<line x1="360" y1="67" x2="380" y2="67" stroke="#3b82f6" marker-end="url(#arr2)"/>
+<rect x="380" y="50" width="65" height="35" rx="8" fill="#10b981" stroke="#10b981"/><text x="412" y="73" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">?</text>
+<rect x="60" y="120" width="200" height="16" rx="4" fill="#3b82f6" opacity="0.8"/><text x="160" y="132" text-anchor="middle" fill="#fff" font-size="10">Low T=0.1 "," (85%)</text>
+<rect x="60" y="145" width="80" height="16" rx="4" fill="#f59e0b" opacity="0.8"/><text x="100" y="157" text-anchor="middle" fill="#fff" font-size="10">High T=1.0 "," (35%)</text>
+<rect x="144" y="145" width="65" height="16" rx="4" fill="#f59e0b" opacity="0.6"/><text x="176" y="157" text-anchor="middle" fill="#fff" font-size="9">"。(28%)</text>
+<rect x="430" y="110" width="230" height="80" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+<text x="545" y="133" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="600">💡 Temperature提示</text>
+<text x="445" y="155" fill="#64748b" font-size="11">• 写代码：T=0~0.3（精确）</text>
+<text x="445" y="173" fill="#64748b" font-size="11">• 创意写作：T=0.7~1.0（多样）</text>
+<text x="445" y="191" fill="#64748b" font-size="11">• 事实问答：T=0（确定性）</text>
+</svg>
+<div class="svg-caption">图6-1：LLM逐Token预测流程 + Temperature影响</div>
+</div>
+<h3>Temperature 实际效果对比</h3>
+<p>同一问题不同Temperature产出不同风格。问AI"用一个词形容北京"：</p>
+<div class="svg-container">
+<svg viewBox="0 0 660 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="30" y="35" width="190" height="110" rx="10" fill="#eff6ff" stroke="#3b82f6"/>
+<text x="125" y="58" text-anchor="middle" fill="#2563eb" font-size="12" font-weight="700">T=0（确定性）</text>
+<text x="125" y="82" text-anchor="middle" fill="#334155" font-size="11">每次回答：</text>
+<text x="125" y="105" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="700">"伟大"</text>
+<text x="125" y="128" text-anchor="middle" fill="#64748b" font-size="10">适合：需要稳定一致</text>
+<rect x="240" y="35" width="190" height="110" rx="10" fill="#fef3c7" stroke="#f59e0b"/>
+<text x="335" y="58" text-anchor="middle" fill="#d97706" font-size="12" font-weight="700">T=0.7（平衡）</text>
+<text x="335" y="82" text-anchor="middle" fill="#334155" font-size="11">可能回答：</text>
+<text x="335" y="105" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="700">"古都" / "繁华"</text>
+<text x="335" y="128" text-anchor="middle" fill="#64748b" font-size="10">适合：日常使用（推荐）</text>
+<rect x="450" y="35" width="190" height="110" rx="10" fill="#fef2f2" stroke="#ef4444"/>
+<text x="545" y="58" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="700">T=1.5（随机）</text>
+<text x="545" y="82" text-anchor="middle" fill="#334155" font-size="11">可能回答：</text>
+<text x="545" y="105" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="700">"烤鸭" / "堵"</text>
+<text x="545" y="128" text-anchor="middle" fill="#64748b" font-size="10">适合：创意头脑风暴</text>
+</svg>
+<div class="svg-caption">图6-2：Temperature对输出的实际影响对比</div>
+</div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解Token和逐Token预测的核心机制</li><li>掌握Temperature参数的含义和适用场景</li><li>理解上下文窗口的概念和重要性</li></ul></div>
+</div>
+</div>
+
+<!-- 原理 L4 (原lesson-7) -->
+<div class="card" id="lesson-7">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#8b5cf6"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#8b5cf6">L4</span><h3 class="card-title">多模态：感知的统一</h3></div>
+<div class="card-tags"><span class="card-tag">原理</span><span class="card-tag">多模态</span></div></div>
+<div class="card-content">
+<p>多模态AI的核心突破：<strong>将不同类型的信息映射到同一个向量空间</strong>，使跨模态理解和生成成为可能。通俗理解：人可以同时看、听、说，大脑将所有感官信息融合为统一"体验"。多模态AI做类似的事情。</p>
+<div class="svg-container">
+<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="merge-grad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.3"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.05"/></radialGradient></defs>
+<text x="300" y="28" text-anchor="middle" fill="#8b5cf6" font-size="13" font-weight="600">多模态统一向量空间</text>
+<rect x="40" y="60" width="100" height="60" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+<text x="90" y="88" text-anchor="middle" fill="#2563eb" font-size="22">📝</text><text x="90" y="108" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">文字</text>
+<rect x="250" y="60" width="100" height="60" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="300" y="88" text-anchor="middle" fill="#d97706" font-size="22">🖼️</text><text x="300" y="108" text-anchor="middle" fill="#d97706" font-size="11" font-weight="600">图片</text>
+<rect x="460" y="60" width="100" height="60" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+<text x="510" y="88" text-anchor="middle" fill="#db2777" font-size="22">🎵</text><text x="510" y="108" text-anchor="middle" fill="#db2777" font-size="11" font-weight="600">音频</text>
+<line x1="90" y1="120" x2="270" y2="195" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3"/>
+<line x1="300" y1="120" x2="300" y2="175" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+<line x1="510" y1="120" x2="330" y2="195" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="5,3"/>
+<circle cx="300" cy="240" r="60" fill="url(#merge-grad)" stroke="#8b5cf6" stroke-width="2"/>
+<text x="300" y="230" text-anchor="middle" fill="#7c3aed" font-size="13" font-weight="700">统一</text>
+<text x="300" y="248" text-anchor="middle" fill="#7c3aed" font-size="13" font-weight="700">向量空间</text>
+<text x="300" y="268" text-anchor="middle" fill="#7c3aed" font-size="11">A cat = 一只猫 = 🐱声音</text>
+<text x="300" y="320" text-anchor="middle" fill="#64748b" font-size="11">不同模态的相同语义 → 向量空间中的同一区域</text>
+</svg>
+<div class="svg-caption">图7-1：多模态统一向量空间</div>
+</div>
+<div class="callout"><div class="callout-title">💡 多模态通俗理解</div><p>想象一个能同时看图、读文字、听声音的"超级大脑"。当你说"那只猫"时，它能同时在脑海中浮现猫的图像、文字含义和叫声——这就是多模态统一：所有感官信息汇聚到同一个"思维空间"。</p></div>
+<h3>多模态的核心能力</h3>
+<ul><li><strong>跨模态理解</strong>：看图说话、听音辨意</li><li><strong>跨模态生成</strong>：文生图、文生视频</li><li><strong>模态融合</strong>：同时处理多种输入</li><li><strong>统一推理</strong>：同一思维空间处理所有信息</li></ul>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解多模态AI的核心原理</li><li>了解统一向量空间的概念</li><li>认识多模态能力的应用可能性</li></ul></div>
+</div>
+</div>
+
+<!-- 原理 L5 (原lesson-8) -->
+<div class="card" id="lesson-8">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#8b5cf6"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#8b5cf6">L5</span><h3 class="card-title">RAG：给大模型装上知识库</h3></div>
+<div class="card-tags"><span class="card-tag">原理</span><span class="card-tag">RAG</span></div></div>
+<div class="card-content">
+<p>RAG解决了LLM的<strong>知识时效性</strong>和<strong>幻觉问题</strong>。通俗理解：就像开卷考试——允许AI翻阅参考书再作答。</p>
+<div class="svg-container">
+<svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-rag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#8b5cf6"/></marker></defs>
+<text x="30" y="28" fill="#8b5cf6" font-size="13" font-weight="600">RAG五步工作流程</text>
+<rect x="20" y="50" width="110" height="45" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/><text x="75" y="70" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">❶ 用户提问</text><text x="75" y="85" text-anchor="middle" fill="#64748b" font-size="9">输入Query</text>
+<line x1="130" y1="72" x2="160" y2="72" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arr-rag)"/>
+<rect x="160" y="50" width="100" height="45" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/><text x="210" y="70" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="600">❷ 向量化</text><text x="210" y="85" text-anchor="middle" fill="#64748b" font-size="9">Embedding</text>
+<line x1="260" y1="72" x2="290" y2="72" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arr-rag)"/>
+<rect x="290" y="50" width="100" height="45" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/><text x="340" y="70" text-anchor="middle" fill="#d97706" font-size="11" font-weight="600">❸ 检索匹配</text><text x="340" y="85" text-anchor="middle" fill="#64748b" font-size="9">知识库搜索</text>
+<line x1="390" y1="72" x2="420" y2="72" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arr-rag)"/>
+<rect x="420" y="50" width="100" height="45" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5"/><text x="470" y="70" text-anchor="middle" fill="#db2777" font-size="11" font-weight="600">❹ 组装上下文</text><text x="470" y="85" text-anchor="middle" fill="#64748b" font-size="9">Prompt+结果</text>
+<line x1="520" y1="72" x2="550" y2="72" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arr-rag)"/>
+<rect x="550" y="50" width="110" height="45" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/><text x="605" y="70" text-anchor="middle" fill="#059669" font-size="11" font-weight="600">❺ 生成回答</text><text x="605" y="85" text-anchor="middle" fill="#64748b" font-size="9">LLM生成</text>
+<rect x="260" y="120" width="200" height="60" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+<text x="360" y="145" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="600">📚 知识库</text>
+<text x="360" y="165" text-anchor="middle" fill="#64748b" font-size="10">文档 → 分块 → 向量化索引</text>
+<rect x="80" y="200" width="560" height="30" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+<text x="360" y="220" text-anchor="middle" fill="#059669" font-size="11" font-weight="600">✅ 知识可更新 ✅ 可溯源 ✅ 减少幻觉 ✅ 降低成本 ✅ 支持私有数据</text>
+</svg>
+<div class="svg-caption">图8-1：RAG五步工作流程</div>
+</div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解RAG的核心工作原理</li><li>掌握RAG解决的核心问题</li><li>了解RAG系统的关键组件</li></ul></div>
+</div>
+</div>
+
+<!-- 原理 L6 (原lesson-9) -->
+<div class="card" id="lesson-9">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#8b5cf6"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#8b5cf6">L6</span><h3 class="card-title">Agent：从问答到行动</h3></div>
+<div class="card-tags"><span class="card-tag">原理</span><span class="card-tag">Agent</span></div></div>
+<div class="card-content">
+<p>Agent是AI能力的<strong>又一次跃迁</strong>。LLM是「被动的回答器」，Agent是「主动的行动者」——能自主规划、使用工具、执行多步骤任务。</p>
+<div class="svg-container">
+<svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#8b5cf6"/></marker></defs>
+<rect x="30" y="40" width="280" height="220" rx="16" fill="#f8fafc" stroke="#e2e8f0"/>
+<text x="170" y="68" text-anchor="middle" fill="#64748b" font-size="13" font-weight="600">LLM 单次问答</text>
+<rect x="60" y="90" width="80" height="40" rx="8" fill="#eff6ff" stroke="#3b82f6"/><text x="100" y="115" text-anchor="middle" fill="#2563eb" font-size="11">用户提问</text>
+<line x1="140" y1="110" x2="190" y2="110" stroke="#3b82f6" marker-end="url(#arr-a)"/>
+<rect x="190" y="90" width="80" height="40" rx="8" fill="#dbeafe" stroke="#3b82f6"/><text x="230" y="115" text-anchor="middle" fill="#1d4ed8" font-size="11">LLM回答</text>
+<text x="170" y="195" text-anchor="middle" fill="#94a3b8" font-size="10">一次输入 → 一次输出</text>
+<text x="170" y="215" text-anchor="middle" fill="#94a3b8" font-size="10">无记忆、无工具、无行动力</text>
+<rect x="370" y="40" width="280" height="220" rx="16" fill="#f0fdf4" stroke="#86efac"/>
+<text x="510" y="68" text-anchor="middle" fill="#059669" font-size="13" font-weight="600">Agent 执行循环</text>
+<rect x="400" y="85" width="70" height="32" rx="8" fill="#10b981"/><text x="435" y="106" text-anchor="middle" fill="#fff" font-size="10">思考</text>
+<line x1="470" y1="101" x2="495" y2="101" stroke="#10b981" marker-end="url(#arr-a)"/>
+<rect x="495" y="85" width="70" height="32" rx="8" fill="#3b82f6"/><text x="530" y="106" text-anchor="middle" fill="#fff" font-size="10">行动</text>
+<line x1="530" y1="117" x2="530" y2="140" stroke="#3b82f6" marker-end="url(#arr-a)"/>
+<rect x="495" y="140" width="70" height="32" rx="8" fill="#f59e0b"/><text x="530" y="161" text-anchor="middle" fill="#fff" font-size="10">观察</text>
+<line x1="495" y1="156" x2="470" y2="156" stroke="#f59e0b" marker-end="url(#arr-a)"/>
+<text x="510" y="200" text-anchor="middle" fill="#059669" font-size="10" font-weight="600">可调用工具：搜索 / 代码 / 文件 / API</text>
+</svg>
+<div class="svg-caption">图9-1：LLM单次问答 vs Agent执行循环</div>
+</div>
+<div class="callout tip"><div class="callout-title">💡 Agent通俗理解</div><p>LLM就像一个很聪明但只能坐在桌边回答问题的人。Agent就像一个能自主走动、翻书、打电话、做记录的助理。区别在于：Agent能<strong>主动采取行动</strong>，而不只是被动回答。</p></div>
+<h3>Agent的三大核心组件</h3>
+<ul><li><strong>大脑（LLM）</strong>：理解、推理、决策</li><li><strong>记忆</strong>：短期记忆（上下文）+ 长期记忆（外部存储）</li><li><strong>工具</strong>：搜索、代码执行、文件系统、API调用</li></ul>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解Agent与LLM的本质区别</li><li>掌握Agent的核心工作循环</li><li>了解Agent的应用场景和局限</li></ul></div>
+</div>
+</div>
+</div><!-- end module-2 -->
+
+<!-- ===== 模块三：使用篇 ===== -->
+<div class="module" id="module-3">
+<div class="module-header">
+<div class="module-icon" style="background:linear-gradient(135deg,#10b981,#059669)">三</div>
+<div><h2>使用篇</h2><p>掌握高效使用AI的六大核心方法</p></div>
+</div>
+
+<!-- 使用 L1 (原lesson-10) -->
+<div class="card" id="lesson-10">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#10b981"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#10b981">L1</span><h3 class="card-title">识别真正的问题</h3></div>
+<div class="card-tags"><span class="card-tag">使用</span><span class="card-tag">问题定义</span></div></div>
+<div class="card-content">
+<p>使用AI的第一步不是打开AI工具，而是<strong>搞清楚你要解决什么问题</strong>。问题定义的质量直接决定AI输出质量。</p>
+<h3>问题诊断5步法</h3>
+<ol>
+<li><strong>现象描述</strong>：具体写出你遇到的困难（不是"帮我写个方案"，而是"我需要说服老板增加AI工具预算"）</li>
+<li><strong>根因分析</strong>：连续问3个"为什么"找到根本原因</li>
+<li><strong>目标定义</strong>：写出理想的终点状态（"老板同意增加50万预算"）</li>
+<li><strong>约束识别</strong>：列出限制条件（预算上限、时间、权限）</li>
+<li><strong>AI角色定位</strong>：确定AI在你解决方案中的角色（研究员？写手？分析师？）</li>
+</ol>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># 问题诊断5步法Prompt模板
+
+我遇到了以下问题：
+【描述现象】
+
+请帮我分析：
+1. 这个问题的根本原因可能是什么？（连续问3个为什么）
+2. 理想的解决结果是什么？
+3. 有哪些可能的解决方案？（列出3-5个）
+4. 每个方案的优缺点和适用条件是什么？
+5. 推荐哪个方案？为什么？
+
+约束条件：
+- 【预算/时间/人力限制】
+- 【其他限制】</div></div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握问题诊断5步法</li><li>学会精准描述问题</li><li>理解问题质量决定输出质量</li></ul></div>
+</div>
+</div>
+
+<!-- 使用 L2 (原lesson-11) -->
+<div class="card" id="lesson-11">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#10b981"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#10b981">L2</span><h3 class="card-title">认知镜像法</h3></div>
+<div class="card-tags"><span class="card-tag">使用</span><span class="card-tag">思维模型</span></div></div>
+<div class="card-content">
+<p>认知镜像法的核心：让AI<strong>扮演你的受众、对手或评审</strong>，从外部视角审视你的想法，发现盲点。</p>
+<h3>红蓝对抗实战模板</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># 红蓝对抗Prompt模板
+
+## 角色设定
+你现在是【红方/蓝方】：
+- 红方：作为挑剔的反对者，找出方案中的所有漏洞
+- 蓝方：作为方案捍卫者，回应红方的质疑
+
+## 我的方案
+【在此粘贴你的方案或想法】
+
+## 输出要求
+1. 红方先列出5个最致命的问题/风险
+2. 蓝方逐一回应，说明如何应对
+3. 双方达成共识后的改进方案
+4. 仍然存在且需要人工决策的风险</div></div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握认知镜像法的核心概念</li><li>学会红蓝对抗思维</li><li>能用AI模拟不同视角审视方案</li></ul></div>
+</div>
+</div>
+
+<!-- 使用 L3 (原lesson-12) -->
+<div class="card" id="lesson-12">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#10b981"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#10b981">L3</span><h3 class="card-title">追问链与深度思考</h3></div>
+<div class="card-tags"><span class="card-tag">使用</span><span class="card-tag">追问</span></div></div>
+<div class="card-content">
+<p>大多数人对AI的使用停留在"一问一答"。真正的效率提升来自<strong>追问链</strong>——通过连续追问，层层深入，让AI帮你完成深度思考。</p>
+<h3>追问模板库</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># 追问链模板：深度分析框架
+
+## 第一层：事实澄清
+"关于【主题】，请先帮我梳理目前已知的核心事实，标注哪些是确定的、哪些是推测的。"
+
+## 第二层：逻辑分析
+"基于上述事实，请分析因果关系链。哪个因素是关键变量？改变哪个因素影响最大？"
+
+## 第三层：反面思考
+"如果我之前的假设是错的，事实正好相反，结论会怎样变化？有什么是被我忽略的？"
+
+## 第四层：极端测试
+"在最好/最坏情况下，这个结论还成立吗？边界条件是什么？"
+
+## 第五层：行动建议
+"基于以上分析，请给出3个可执行的行动建议，按优先级排序，并说明预期效果和风险。"</div></div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握追问链的5层框架</li><li>学会用追问引导AI深度思考</li><li>能识别浅层回答并继续追问</li></ul></div>
+</div>
+</div>
+
+<!-- 使用 L4 (原lesson-13) -->
+<div class="card" id="lesson-13">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#10b981"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#10b981">L4</span><h3 class="card-title">MECE结构化拆解</h3></div>
+<div class="card-tags"><span class="card-tag">使用</span><span class="card-tag">结构化</span></div></div>
+<div class="card-content">
+<p>MECE（Mutually Exclusive, Collectively Exhaustive）是<strong>不重叠、不遗漏</strong>的结构化拆解原则。用AI做MECE分析时，关键是<strong>约束AI的拆解维度</strong>。</p>
+<h3>拆解检查清单</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># MECE拆解检查Prompt模板
+
+请帮我将【主题】进行MECE结构化拆解：
+
+## 拆解要求
+1. 先确定2-4个拆解维度（如时间/空间/角色/流程）
+2. 每个维度下拆分3-7个子项
+3. 检查是否符合MECE原则：
+   - Mutually Exclusive：子项之间是否有重叠？
+   - Collectively Exhaustive：是否有遗漏？
+4. 标注可能的重叠区域和遗漏风险
+
+## 我的主题
+【描述需要拆解的问题】
+
+## 检查清单
+- [ ] 每个子项是否只属于一个类别？
+- [ ] 所有可能性是否都被覆盖？
+- [ ] 拆解粒度是否一致？
+- [ ] 是否存在"其他"兜底类别？</div></div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握MECE原则的核心思想</li><li>学会用AI进行结构化拆解</li><li>能检查和修正拆解结果</li></ul></div>
+</div>
+</div>
+
+<!-- 使用 L5 (原lesson-14) -->
+<div class="card" id="lesson-14">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#10b981"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#10b981">L5</span><h3 class="card-title">角色扮演与场景设定</h3></div>
+<div class="card-tags"><span class="card-tag">使用</span><span class="card-tag">角色扮演</span></div></div>
+<div class="card-content">
+<p>通过设定AI的角色和工作场景，可以大幅提升输出的<strong>专业性和针对性</strong>。好的角色设定 = 专业领域 + 具体经验 + 行为偏好。</p>
+<h3>5个高价值角色设定模板</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># 角色设定模板1：资深产品经理
+你现在是一位有15年经验的资深产品经理，曾在BAT工作，主导过千万级DAU产品。
+你的特点：
+- 关注用户价值和商业目标的平衡
+- 善于用数据驱动决策
+- 表达简洁有力，用框架和类比说明问题
+
+请帮我【具体任务】。
+
+# 角色设定模板2：顶级咨询顾问
+你现在是McKinsey的高级合伙人，擅长战略分析和问题拆解。
+风格要求：
+- 使用金字塔原理组织观点
+- 每个结论都有数据和逻辑支撑
+- 善于用MECE框架分析问题
+
+请帮我【具体任务】。
+
+# 角色设定模板3：严格的技术评审
+你现在是一位资深技术架构师，有20年分布式系统经验。
+评审标准：
+- 关注可扩展性、可维护性、安全性
+- 会指出代码/方案中的潜在风险
+- 提供具体的改进建议而非空泛批评
+
+请帮我评审【具体内容】。
+
+# 角色设定模板4：创意总监
+你现在是一位顶级广告创意总监，服务过世界500强品牌。
+创意特点：
+- 善于找到情感共鸣点
+- 标题简洁有力，一针见血
+- 能产出多种风格的创意方案
+
+请帮我【具体任务】。
+
+# 角色设定模板5：苏格拉底式导师
+你现在是苏格拉底式的思维导师，不会直接给我答案。
+教学方式：
+- 通过提问引导我自己思考
+- 每次只问一个问题
+- 等我回答后再追问
+- 帮助我发现思维盲点
+
+我想探讨的主题是：【主题】</div></div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握角色设定的三要素</li><li>学会5种高价值角色模板</li><li>理解不同角色适用的场景</li></ul></div>
+</div>
+</div>
+
+<!-- 使用 L6 (原lesson-15) -->
+<div class="card" id="lesson-15">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#10b981"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#10b981">L6</span><h3 class="card-title">多步骤复杂任务</h3></div>
+<div class="card-tags"><span class="card-tag">使用</span><span class="card-tag">任务编排</span></div></div>
+<div class="card-content">
+<p>复杂任务不能指望一次Prompt完成。核心策略：<strong>拆解→分步执行→组装</strong>。就像项目经理管理项目一样管理AI的输出。</p>
+<h3>任务拆解模板</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># 多步骤任务编排Prompt模板
+
+## 任务总览
+我要完成：【描述最终目标】
+
+## 步骤拆解
+请将这个任务拆解为具体的执行步骤，每个步骤满足：
+- 输入明确（需要什么信息）
+- 输出明确（产出什么格式）
+- 可独立验证（如何检查步骤完成质量）
+
+## 请按以下格式输出每个步骤：
+步骤N：【步骤名称】
+- 输入：【需要什么】
+- 输出：【产出什么】
+- Prompt建议：【给AI的具体指令】
+- 验收标准：【如何判断质量】
+
+## 依赖关系
+标注哪些步骤必须按顺序执行，哪些可以并行。</div></div>
+<h3>编排原则</h3>
+<ul>
+<li><strong>大任务拆小</strong>：每个步骤只做一件事</li>
+<li><strong>中间检查点</strong>：每步完成后人工确认再继续</li>
+<li><strong>并行化</strong>：独立的子任务可同时让AI处理</li>
+<li><strong>版本管理</strong>：保留每个步骤的输出，方便回溯</li>
+</ul>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握任务拆解的方法</li><li>学会编排多步骤AI工作流</li><li>理解并行vs串行策略</li></ul></div>
+</div>
+</div>
+</div><!-- end module-3 -->
+
+<!-- ===== 模块四：构建篇 ===== -->
+<div class="module" id="module-4">
+<div class="module-header">
+<div class="module-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">四</div>
+<div><h2>构建篇</h2><p>从使用者升级为构建者</p></div>
+</div>
+
+<!-- 构建 L1 (原lesson-16) -->
+<div class="card" id="lesson-16">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#f59e0b"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#f59e0b">L1</span><h3 class="card-title">评估与选择</h3></div>
+<div class="card-tags"><span class="card-tag">构建</span><span class="card-tag">评估</span></div></div>
+<div class="card-content">
+<p>选择AI工具不是看哪个最火，而是系统性地评估哪个<strong>最适合你的场景</strong>。一个好的选型决策，能让你在后续的工作中事半功倍；而一个盲目的选择，则可能浪费数周的学习成本。</p>
+
+<h3>评估四维框架</h3>
+<p>评估任何AI工具时，从以下四个维度进行系统考量。不要只看某一个维度，要综合权衡：</p>
+<ul>
+<li><strong>效果</strong>：输出质量是否满足需求？关注准确率（信息是否正确）、相关性（是否切中主题）、完整性（是否覆盖要点）。<br>举例：用ChatGPT和Claude分别生成一份市场分析报告，对比哪个的数据引用更准确、逻辑更严密。</li>
+<li><strong>效率</strong>：是否真正提升了效率？不仅要看工具本身的执行速度，还要考虑学习成本、配置成本和集成成本。<br>举例：一个功能强大的工具如果需要3天学习才能上手，而简单工具10分钟就能用，对于一次性任务后者更高效。</li>
+<li><strong>安全</strong>：数据隐私、合规性、可控性。你的业务数据是否会用于训练模型？是否符合行业合规要求（如GDPR、等保）？能否关闭数据留存？<br>举例：涉及客户数据的场景，应优先选择支持私有化部署或明确承诺不使用用户数据训练的工具。</li>
+<li><strong>成本</strong>：订阅费用、API调用成本、隐性成本（学习时间、试错成本）。记住：最便宜的工具未必总成本最低——一个高准确率的付费工具可能比免费的低效工具更划算。</li>
+</ul>
+
+<div class="svg-container">
+<svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;width:100%;height:auto;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;padding:16px">
+<!-- Title -->
+<text x="200" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">评估四维雷达图</text>
+<!-- Grid circles -->
+<circle cx="200" cy="175" r="30" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+<circle cx="200" cy="175" r="60" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+<circle cx="200" cy="175" r="90" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+<circle cx="200" cy="175" r="110" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<!-- Axis lines -->
+<line x1="200" y1="65" x2="200" y2="285" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="90" y1="175" x2="310" y2="175" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="123" y1="98" x2="277" y2="252" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="277" y1="98" x2="123" y2="252" stroke="#e2e8f0" stroke-width="1"/>
+<!-- Data polygon -->
+<polygon points="200,78 116,152 188,268 284,200" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="2.5" stroke-linejoin="round"/>
+<!-- Data points -->
+<circle cx="200" cy="78" r="5" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+<circle cx="116" cy="152" r="5" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+<circle cx="188" cy="268" r="5" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+<circle cx="284" cy="200" r="5" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+<!-- Labels -->
+<text x="200" y="56" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">效果</text>
+<text x="200" y="44" text-anchor="middle" font-size="10" fill="#64748b">质量 · 准确率</text>
+<text x="72" y="148" text-anchor="end" font-size="13" font-weight="bold" fill="#1e293b">效率</text>
+<text x="72" y="162" text-anchor="end" font-size="10" fill="#64748b">速度 · 学习成本</text>
+<text x="200" y="302" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">安全</text>
+<text x="200" y="316" text-anchor="middle" font-size="10" fill="#64748b">隐私 · 合规</text>
+<text x="328" y="196" text-anchor="start" font-size="13" font-weight="bold" fill="#1e293b">成本</text>
+<text x="328" y="210" text-anchor="start" font-size="10" fill="#64748b">费用 · 隐性成本</text>
+<!-- Score labels -->
+<text x="100" y="60" font-size="9" fill="#94a3b8">高</text>
+<text x="100" y="230" font-size="9" fill="#94a3b8">低</text>
+</svg>
+</div>
+
+<h3>评估流程</h3>
+<ol>
+<li><strong>明确核心需求</strong>：列出你最需要AI解决的3个问题，按优先级排序。模糊的需求（"提高效率"）无法指导选型，要具体化（"每周自动生成客户反馈分析报告"）。</li>
+<li><strong>筛选候选工具</strong>：根据核心需求，筛选不超过5个候选工具。参考社区评价、同行推荐、官方文档，但不要超过5个——选择太多反而导致决策瘫痪。</li>
+<li><strong>统一标准测试</strong>：用<strong>相同的任务</strong>逐一测试每个候选工具。测试任务应尽可能接近你的真实工作场景，而非简单 demo。</li>
+<li><strong>量化记录对比</strong>：记录输出质量（可请同事盲评）、耗时、token/API消耗、操作复杂度。用表格整理，让数据说话。</li>
+<li><strong>试用验证决策</strong>：选定工具后，<strong>设定2周试用期</strong>，在实际工作中验证。试用期结束后回顾：是否真的提升了效率？是否遇到了预期外的问题？</li>
+</ol>
+
+<h3>AI工具选型清单</h3>
+<div style="overflow-x:auto;margin:12px 0">
+<table style="width:100%;border-collapse:collapse;font-size:13px;background:#f8fafc;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0">
+<thead><tr style="background:#f59e0b;color:#fff">
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #d97706">场景</th>
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #d97706">推荐工具</th>
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #d97706">推荐理由</th>
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #d97706">月费参考</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #e2e8f0"><td style="padding:8px 12px"><strong>通用对话</strong></td><td style="padding:8px 12px">ChatGPT / Claude</td><td style="padding:8px 12px">综合能力强，生态丰富，适合大多数文本场景</td><td style="padding:8px 12px">$20/月</td></tr>
+<tr style="border-bottom:1px solid #e2e8f0;background:#fff"><td style="padding:8px 12px"><strong>长文写作</strong></td><td style="padding:8px 12px">Claude</td><td style="padding:8px 12px">长文本处理能力突出，输出连贯性更好</td><td style="padding:8px 12px">$20/月</td></tr>
+<tr style="border-bottom:1px solid #e2e8f0"><td style="padding:8px 12px"><strong>代码开发</strong></td><td style="padding:8px 12px">Cursor / Copilot</td><td style="padding:8px 12px">深度集成IDE，代码补全和重构效率高</td><td style="padding:8px 12px">$10-20/月</td></tr>
+<tr style="border-bottom:1px solid #e2e8f0;background:#fff"><td style="padding:8px 12px"><strong>数据分析</strong></td><td style="padding:8px 12px">ChatGPT + Code Interpreter</td><td style="padding:8px 12px">可直接上传文件分析，支持图表生成</td><td style="padding:8px 12px">$20/月</td></tr>
+<tr style="border-bottom:1px solid #e2e8f0"><td style="padding:8px 12px"><strong>图像设计</strong></td><td style="padding:8px 12px">Midjourney / DALL·E</td><td style="padding:8px 12px">MJ艺术感强，DALL·E集成度高易上手</td><td style="padding:8px 12px">$10-30/月</td></tr>
+<tr style="border-bottom:1px solid #e2e8f0;background:#fff"><td style="padding:8px 12px"><strong>PPT制作</strong></td><td style="padding:8px 12px">Gamma / Tome</td><td style="padding:8px 12px">一键生成演示文稿，模板美观，支持编辑</td><td style="padding:8px 12px">$10/月起</td></tr>
+<tr><td style="padding:8px 12px;background:#f8fafc"><strong>企业私有</strong></td><td style="padding:8px 12px;background:#f8fafc">本地部署 LLM</td><td style="padding:8px 12px;background:#f8fafc">数据不出内网，合规要求高时首选</td><td style="padding:8px 12px;background:#f8fafc">硬件成本为主</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip"><div class="callout-title">💡 选型三原则</div>
+<p><strong>1. 场景优先，工具其次</strong>——先想清楚你要解决什么问题，再找工具，而不是先选工具再想怎么用。<br><strong>2. 警惕沉没成本</strong>——如果试用2周后效率没有明显提升，果断换工具。不要因为"已经学了很久"而将就。<br><strong>3. 保留Plan B</strong>——永远有一个备选方案。AI工具更新频繁，今天的首选可能明天就落后。</p></div>
+
+<h3>Prompt模板：AI工具对比分析</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content">你是一个AI工具评估专家。请帮我对比以下两个AI工具在【填写你的具体场景】中的表现。
+
+## 对比维度
+1. **效果**：输出质量、准确率、完整性（各5分）
+2. **效率**：响应速度、操作复杂度、学习曲线（各5分）
+3. **安全**：数据隐私保护、企业合规支持（各5分）
+4. **成本**：订阅费用、API成本、隐性学习成本（各5分）
+
+## 工具信息
+- 工具A：【工具名称】，月费【金额】
+- 工具B：【工具名称】，月费【金额】
+
+## 我的场景
+- 核心需求：【描述你的1-3个核心需求】
+- 使用频率：【每天/每周/偶尔】
+- 数据敏感度：【高/中/低】
+
+## 输出要求
+请按以下格式输出：
+1. 各维度评分对比表
+2. 综合推荐结论
+3. 针对我的场景的使用建议
+4. 不推荐的场景（避免踩坑）</div></div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握AI工具评估的四维框架</li><li>学会系统性选型而非跟风</li><li>理解隐性成本的重要性</li><li>能够使用结构化方法进行工具对比</li><li>建立工具试用期验证习惯</li></ul></div>
+</div>
+</div>
+
+<!-- 构建 L2 (原lesson-17) -->
+<div class="card" id="lesson-17">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#f59e0b"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#f59e0b">L2</span><h3 class="card-title">经验沉淀</h3></div>
+<div class="card-tags"><span class="card-tag">构建</span><span class="card-tag">知识管理</span></div></div>
+<div class="card-content">
+<p>每次使用AI的经验都是<strong>可复用的资产</strong>。系统化沉淀Prompt模板、工作流程和最佳实践，是AI驱动工作的核心能力。大多数人用AI停留在"每次重新摸索"的阶段，而高手早已建立了自己的经验资产库。</p>
+
+<h3>经验沉淀三件套</h3>
+<ul>
+<li><strong>Prompt库</strong>：经过验证的Prompt模板，按场景分类管理。每次优化后的Prompt都要保存新版本，形成迭代记录。<br>举例：一个"周报生成"Prompt，经过10次迭代后可能从50字变成300字，但输出质量从"需要大量修改"变成"几乎可直接使用"。</li>
+<li><strong>工作流库</strong>：多步骤AI工作流的SOP文档，记录完整的操作步骤、输入输出规范和注意事项。让任何人（包括未来的你）都能照着执行。<br>举例："竞品分析工作流"：搜索竞品信息 → 提取关键指标 → 生成对比表格 → 撰写分析报告，每一步都记录使用的工具和Prompt。</li>
+<li><strong>避坑清单</strong>：记录失败案例、错误做法和教训。知道"什么不行"和知道"什么行"一样重要。每次踩坑后花2分钟记录，是性价比最高的知识投资。</li>
+</ul>
+
+<h3>隐性知识 vs 显性知识</h3>
+<p>经验沉淀的本质，是把<strong>隐性知识转化为显性知识</strong>的过程：</p>
+<ul>
+<li><strong>隐性知识</strong>：你做了但说不清的东西。比如" Prompt 怎么写AI就听懂了"、"这个任务用哪个角度切入效果好"——这些都在你脑子里，但无法直接传递给别人。</li>
+<li><strong>显性知识</strong>：可以被写下来、教给别人、放入系统的知识。比如一份标准化的Prompt模板、一个详细的工作流文档。</li>
+</ul>
+<div class="callout tip"><div class="callout-title">💡 识别隐性知识的方法</div>
+<p>问自己三个问题：<br>1. 我在做这件事时，有没有"凭感觉"的判断？<br>2. 如果让一个新手来做，他会在哪里卡住？<br>3. 我有没有哪些"只有我自己知道的"技巧？<br>答案"有"的地方，就是隐性知识所在——把它们写下来。</p></div>
+
+<h3>"如果-那么"框架详解</h3>
+<p>把你的判断逻辑转化为规则，是沉淀经验的关键一步。"如果-那么"框架是最简洁有效的规则表达方式：</p>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin:12px 0;font-size:13px">
+<p style="margin:0 0 8px 0;color:#64748b;font-style:italic">格式：IF [触发条件] THEN [执行动作]</p>
+<p><strong>示例：</strong></p>
+<ul style="margin:8px 0;padding-left:20px">
+<li>IF 生成的内容超过2000字 THEN 分段生成，每段不超过800字</li>
+<li>IF AI输出的数据与已知事实矛盾 THEN 先要求AI重新核实数据源，再继续</li>
+<li>IF 任务涉及客户隐私信息 THEN 使用本地部署模型，不上传到云端</li>
+<li>IF 同一个Prompt连续2次输出不理想 THEN 重新审视任务描述，而非修改措辞</li>
+</ul>
+</div>
+<p>这些规则一旦写下来，就成为可执行的经验资产——不仅你自己受益，团队也能复用。</p>
+
+<div class="svg-container">
+<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%;height:auto;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;padding:16px">
+<!-- Title -->
+<text x="250" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">经验沉淀三步流程</text>
+<!-- Step 1 -->
+<rect x="20" y="60" width="130" height="80" rx="12" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+<circle cx="85" cy="85" r="16" fill="#f59e0b"/>
+<text x="85" y="90" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">1</text>
+<text x="85" y="112" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">识别隐性知识</text>
+<text x="85" y="128" text-anchor="middle" font-size="10" fill="#64748b">观察 · 提问 · 回顾</text>
+<!-- Arrow 1 -->
+<line x1="150" y1="100" x2="185" y2="100" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowM4)"/>
+<defs><marker id="arrowM4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/></marker></defs>
+<!-- Step 2 -->
+<rect x="185" y="60" width="130" height="80" rx="12" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="250" cy="85" r="16" fill="#3b82f6"/>
+<text x="250" y="90" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">2</text>
+<text x="250" y="112" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">结构化表达</text>
+<text x="250" y="128" text-anchor="middle" font-size="10" fill="#64748b">如果-_then · 模板</text>
+<!-- Arrow 2 -->
+<line x1="315" y1="100" x2="350" y2="100" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowM4)"/>
+<!-- Step 3 -->
+<rect x="350" y="60" width="130" height="80" rx="12" fill="#fff" stroke="#10b981" stroke-width="2"/>
+<circle cx="415" cy="85" r="16" fill="#10b981"/>
+<text x="415" y="90" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">3</text>
+<text x="415" y="112" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">封装为资产</text>
+<text x="415" y="128" text-anchor="middle" font-size="10" fill="#64748b">Prompt · 文档 · Agent</text>
+<!-- Bottom labels -->
+<text x="85" y="170" text-anchor="middle" font-size="10" fill="#94a3b8">你脑子里的经验</text>
+<text x="250" y="170" text-anchor="middle" font-size="10" fill="#94a3b8">别人能看懂的形式</text>
+<text x="415" y="170" text-anchor="middle" font-size="10" fill="#94a3b8">系统可执行的资产</text>
+<!-- Feedback loop -->
+<path d="M415,140 L415,190 L85,190 L85,140" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="250" y="205" text-anchor="middle" font-size="10" fill="#94a3b8" font-style:italic>持续迭代优化</text>
+</svg>
+</div>
+
+<h3>经验资产的三种封装形态</h3>
+<div style="overflow-x:auto;margin:12px 0">
+<table style="width:100%;border-collapse:collapse;font-size:13px;background:#f8fafc;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0">
+<thead><tr style="background:linear-gradient(90deg,#f59e0b,#d97706);color:#fff">
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #b45309">形态</th>
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #b45309">适用场景</th>
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #b45309">特点</th>
+<th style="padding:10px 12px;text-align:left;border-bottom:2px solid #b45309">维护成本</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #e2e8f0">
+<td style="padding:8px 12px"><strong style="color:#f59e0b">Prompt模板</strong></td>
+<td style="padding:8px 12px">单一任务标准化（如周报生成、邮件撰写）</td>
+<td style="padding:8px 12px">轻量、易迭代、即插即用</td>
+<td style="padding:8px 12px"><span style="color:#10b981">低</span></td>
+</tr>
+<tr style="border-bottom:1px solid #e2e8f0;background:#fff">
+<td style="padding:8px 12px"><strong style="color:#3b82f6">知识库文档</strong></td>
+<td style="padding:8px 12px">复杂流程参考（如SOP、方法论、案例集）</td>
+<td style="padding:8px 12px">系统性强、可多人协作、便于检索</td>
+<td style="padding:8px 12px"><span style="color:#f59e0b">中</span></td>
+</tr>
+<tr style="background:#f8fafc">
+<td style="padding:8px 12px"><strong style="color:#8b5cf6">Agent/Skill</strong></td>
+<td style="padding:8px 12px">高频自动化任务（如监控分析、自动报告）</td>
+<td style="padding:8px 12px">自主执行、可调度、可集成</td>
+<td style="padding:8px 12px"><span style="color:#ef4444">高</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>建议路径：<strong>先从Prompt模板开始</strong>，验证有效后再升级为知识库文档，最后对高频任务封装为Agent。不要一上来就追求最高形态。</p>
+
+<div class="callout tip"><div class="callout-title">💡 从个人经验到组织资产的跃迁</div>
+<p>一个人的Prompt库是<strong>个人效率工具</strong>，但一个团队的Prompt库 + 工作流库 + 避坑清单就构成了<strong>组织级AI资产</strong>。跃迁的关键是：<br>1. 建立共享的知识库（飞书文档、Notion、Wiki）<br>2. 定期组织经验分享会（每次15分钟，一人分享一个实战案例）<br>3. 指定"AI经验官"负责资产维护和更新<br>当团队的AI经验形成资产沉淀后，新人的上手时间可以从数周缩短到数天。</p></div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解经验沉淀的价值和核心方法</li><li>学会区分隐性知识与显性知识</li><li>掌握"如果-那么"框架进行规则提取</li><li>能够选择合适的资产封装形态</li><li>推动个人经验向组织资产的转化</li></ul></div>
+</div>
+</div>
+
+<!-- 构建 L3 (原lesson-18) -->
+<div class="card" id="lesson-18">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#f59e0b"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#f59e0b">L3</span><h3 class="card-title">从使用到构建</h3></div>
+<div class="card-tags"><span class="card-tag">构建</span><span class="card-tag">自动化</span></div></div>
+<div class="card-content">
+<p>当你积累了足够的AI使用经验后，下一步是<strong>将重复的AI工作流自动化</strong>，让AI能力真正嵌入到日常工作中。自动化不是目标，效率提升才是——不要为了自动化而自动化。</p>
+
+<h3>自动化的四个层次</h3>
+<ul>
+<li><strong>L1: Prompt模板</strong>—— 把反复验证有效的Prompt固定为模板，每次调用时只需填入变量。这是最基础的自动化，投入产出比最高。</li>
+<li><strong>L2: 工作流（Workflow）</strong>—— 把多个步骤串联成自动化流水线：步骤A的输出自动成为步骤B的输入，减少人工搬运和转换。</li>
+<li><strong>L3: Skill</strong>—— 将工作流封装为可被AI直接调用的技能包，用户只需一句话就能触发完整的执行流程。</li>
+<li><strong>L4: Agent</strong>—— 具备自主决策能力的AI系统，能在一定范围内自主判断和执行，人只需设定目标和边界，Agent自主完成。</li>
+</ul>
+
+<div class="svg-container">
+<svg viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" style="max-width:440px;width:100%;height:auto;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;padding:16px">
+<!-- Title -->
+<text x="220" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">自动化层级金字塔</text>
+<!-- Pyramid layers -->
+<!-- L4 Agent - top -->
+<polygon points="220,55 280,110 160,110" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-width="2" stroke-linejoin="round"/>
+<text x="220" y="85" text-anchor="middle" font-size="12" font-weight="bold" fill="#8b5cf6">Agent</text>
+<text x="220" y="100" text-anchor="middle" font-size="9" fill="#64748b">自主决策执行</text>
+<!-- L3 Skill -->
+<polygon points="160,115 280,115 320,170 120,170" fill="#3b82f6" fill-opacity="0.12" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/>
+<text x="220" y="138" text-anchor="middle" font-size="12" font-weight="bold" fill="#3b82f6">Skill</text>
+<text x="220" y="153" text-anchor="middle" font-size="9" fill="#64748b">封装技能包</text>
+<!-- L2 Workflow -->
+<polygon points="120,175 320,175 370,235 70,235" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="2" stroke-linejoin="round"/>
+<text x="220" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#10b981">Workflow</text>
+<text x="220" y="215" text-anchor="middle" font-size="9" fill="#64748b">多步骤流水线</text>
+<!-- L1 Prompt -->
+<polygon points="70,240 370,240 420,305 20,305" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/>
+<text x="220" y="268" text-anchor="middle" font-size="12" font-weight="bold" fill="#f59e0b">Prompt模板</text>
+<text x="220" y="283" text-anchor="middle" font-size="9" fill="#64748b">可复用的Prompt</text>
+<!-- Side annotations -->
+<text x="425" y="90" text-anchor="start" font-size="9" fill="#94a3b8">高复杂度</text>
+<text x="425" y="100" text-anchor="start" font-size="9" fill="#94a3b8">高回报</text>
+<text x="425" y="270" text-anchor="start" font-size="9" fill="#94a3b8">低复杂度</text>
+<text x="425" y="280" text-anchor="start" font-size="9" fill="#94a3b8">快见效</text>
+<!-- Arrow on right -->
+<line x1="422" y1="105" x2="422" y2="260" stroke="#e2e8f0" stroke-width="1.5" marker-end="url(#arrowM4b)"/>
+<defs><marker id="arrowM4b" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#e2e8f0"/></marker></defs>
+</svg>
+</div>
+
+<h3>3R标准：判断一个任务是否值得自动化</h3>
+<p>在投入时间自动化之前，用<strong>3R标准</strong>评估任务是否适合自动化：</p>
+<ul>
+<li><strong>Repetitive（重复性）</strong>：这个任务是否频繁重复？如果一周只做一次，自动化投入可能不值得；如果每天都要做，那就是绝佳的自动化候选。</li>
+<li><strong>Rule-based（规则驱动）</strong>：任务的执行逻辑是否可以被清晰描述？如果每次做的方式都不同、需要大量主观判断，自动化的难度会很高。</li>
+<li><strong>Recoverable（可恢复）</strong>：如果自动化出了错，是否能快速发现和修正？如果一个错误的自动输出会导致严重后果（如直接发给客户），需要额外的验证机制。</li>
+</ul>
+
+<div class="svg-container">
+<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;width:100%;height:auto;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;padding:16px">
+<!-- Title -->
+<text x="200" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">3R评估矩阵</text>
+<!-- Grid background -->
+<rect x="60" y="50" width="280" height="190" rx="8" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+<!-- Row 1: Repetitive HIGH -->
+<rect x="60" y="50" width="280" height="63" rx="8" fill="#f59e0b" fill-opacity="0.08"/>
+<rect x="60" y="113" width="280" height="64" fill="none"/>
+<rect x="60" y="177" width="280" height="63" rx="0 0 8 8" fill="#f8fafc"/>
+<!-- Row dividers -->
+<line x1="60" y1="113" x2="340" y2="113" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="60" y1="177" x2="340" y2="177" stroke="#e2e8f0" stroke-width="1"/>
+<!-- Column dividers -->
+<line x1="200" y1="50" x2="200" y2="240" stroke="#e2e8f0" stroke-width="1"/>
+<!-- Column headers -->
+<text x="130" y="46" text-anchor="middle" font-size="10" fill="#64748b">规则驱动</text>
+<text x="270" y="46" text-anchor="middle" font-size="10" fill="#64748b">判断驱动</text>
+<!-- Row labels -->
+<text x="50" y="83" text-anchor="end" font-size="10" fill="#64748b">高重复</text>
+<text x="50" y="147" text-anchor="end" font-size="10" fill="#64748b">中重复</text>
+<text x="50" y="210" text-anchor="end" font-size="10" fill="#64748b">低重复</text>
+<!-- Cells -->
+<!-- High Repetitive + Rule-based = Best candidate -->
+<rect x="62" y="52" width="136" height="59" rx="6" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.5"/>
+<text x="130" y="76" text-anchor="middle" font-size="11" font-weight="bold" fill="#10b981">最佳自动化</text>
+<text x="130" y="92" text-anchor="middle" font-size="9" fill="#64748b">优先级最高</text>
+<text x="130" y="104" text-anchor="middle" font-size="9" fill="#94a3b8">如：日报生成</text>
+<!-- High Repetitive + Judgment = Good with guardrails -->
+<rect x="202" y="52" width="136" height="59" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="270" y="76" text-anchor="middle" font-size="11" font-weight="bold" fill="#f59e0b">半自动化</text>
+<text x="270" y="92" text-anchor="middle" font-size="9" fill="#64748b">AI草稿 + 人工审核</text>
+<text x="270" y="104" text-anchor="middle" font-size="9" fill="#94a3b8">如：邮件回复</text>
+<!-- Mid Repetitive + Rule-based -->
+<text x="130" y="140" text-anchor="middle" font-size="11" fill="#3b82f6">值得自动化</text>
+<text x="130" y="156" text-anchor="middle" font-size="9" fill="#94a3b8">如：周报汇总</text>
+<!-- Mid Repetitive + Judgment -->
+<text x="270" y="140" text-anchor="middle" font-size="11" fill="#64748b">模板 + 辅助</text>
+<text x="270" y="156" text-anchor="middle" font-size="9" fill="#94a3b8">如：方案评审</text>
+<!-- Low Repetitive cells -->
+<text x="130" y="203" text-anchor="middle" font-size="11" fill="#94a3b8">暂不自动化</text>
+<text x="130" y="219" text-anchor="middle" font-size="9" fill="#94a3b8">手动更灵活</text>
+<text x="270" y="203" text-anchor="middle" font-size="11" fill="#94a3b8">人工为主</text>
+<text x="270" y="219" text-anchor="middle" font-size="9" fill="#94a3b8">AI辅助探索</text>
+<!-- Recoverable indicator -->
+<text x="200" y="265" text-anchor="middle" font-size="10" fill="#94a3b8">+ Recoverable（可恢复性）= 决定是否需要人工兜底</text>
+</svg>
+</div>
+
+<h3>人机协作"前-中-后"分工模型</h3>
+<p>自动化不等于"完全交给AI"。高效的人机协作遵循"前-中-后"分工：</p>
+<ul>
+<li><strong>执行前（人主导）</strong>：定义目标、准备输入数据、设定质量标准。人类负责"说清楚要什么"。如果输入是垃圾，输出一定是垃圾（GIGO原则）。</li>
+<li><strong>执行中（AI主导）</strong>：AI执行任务，人类可选择实时监控或事后检查。对于高风险任务，采用"AI执行 + 关键节点人工确认"的混合模式。</li>
+<li><strong>执行后（人主导）</strong>：审核输出质量、修正错误、记录优化点。每次审核都是下一次优化的依据——形成闭环。</li>
+</ul>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin:12px 0;font-size:13px">
+<p style="margin:0;font-weight:bold;color:#1e293b">核心原则：让AI做它擅长的事（模式匹配、大规模处理），让人做你擅长的事（判断、决策、创意）。</p>
+</div>
+
+<h3>完整案例：VOC分析自动化</h3>
+<p>以<strong>客户声音（VOC）分析</strong>为例，展示从手动到全自动的升级路径：</p>
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin:12px 0;font-size:13px">
+<p style="margin:0 0 10px 0;font-weight:bold;color:#f59e0b">场景描述</p>
+<p style="margin:0 0 12px 0;color:#64748b">每周需从多个渠道（App评论、客服记录、社交媒体）收集用户反馈，分类主题，生成分析报告供产品团队参考。</p>
+<p style="margin:0 0 10px 0;font-weight:bold;color:#f59e0b">Step 1: 评论抓取（手动/脚本）</p>
+<p style="margin:0 0 12px 0;color:#64748b">每周一定时从各渠道导出评论数据，整合为CSV格式。此步骤可后续用API自动化。</p>
+<p style="margin:0 0 10px 0;font-weight:bold;color:#3b82f6">Step 2: AI分类（自动化）</p>
+<p style="margin:0 0 12px 0;color:#64748b">使用Prompt模板让AI对每条评论进行主题分类（Bug反馈/功能建议/使用体验/竞品对比）和情感判断（正面/负面/中性），输出结构化表格。</p>
+<p style="margin:0 0 10px 0;font-weight:bold;color:#10b981">Step 3: 生成报告（自动化）</p>
+<p style="margin:0 0 12px 0;color:#64748b">AI汇总分类结果，生成周度VOC报告：各主题占比、Top问题清单、趋势变化、行动建议。</p>
+<p style="margin:0 0 10px 0;font-weight:bold;color:#8b5cf6">Step 4: 推送与跟进（半自动）</p>
+<p style="margin:0;color:#64748b">报告自动推送到产品群，产品经理根据报告分配跟进任务。人工审核确保报告质量，同时根据反馈优化Prompt。</p>
+</div>
+<p>效果：从<strong>每周4小时手动分析</strong> → <strong>30分钟审核确认</strong>，效率提升8倍。</p>
+
+<div class="callout warning"><div class="callout-title">⚠️ 自动化前的3个自检</div>
+<p>在投入时间构建自动化之前，先回答这3个问题：<br><strong>1. 流程稳定了吗？</strong>——如果手动执行时每次做法都不一样，说明流程还没稳定。先固化流程，再自动化。<br><strong>2. 质量标准清晰吗？</strong>——你能明确描述"好的输出"长什么样吗？如果标准模糊，自动化后的输出质量也无法保证。<br><strong>3. 有人工兜底方案吗？</strong>——如果自动化突然失效（API故障、输出异常），你能快速切回手动操作吗？没有兜底方案的自动化是脆弱的。</p></div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解自动化的四个层次和演进路径</li><li>掌握3R标准判断自动化优先级</li><li>学会设计人机协作的分工模型</li><li>能够从零构建一个完整的自动化案例</li><li>养成自动化前自检的习惯</li></ul></div>
+</div>
+</div>
+</div><!-- end module-4 -->
+
+<!-- ===== 模块五：Skill篇 ===== -->
+<div class="module" id="module-5">
+<div class="module-header">
+<div class="module-icon" style="background:linear-gradient(135deg,#ec4899,#db2777)">五</div>
+<div><h2>Skill篇</h2><p>理解Skill机制，设计你的第一个AI技能</p></div>
+</div>
+
+<!-- Skill L1 (原lesson-19) -->
+<div class="card" id="lesson-19">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#ec4899"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#ec4899">L1</span><h3 class="card-title">Skill机制解析</h3></div>
+<div class="card-tags"><span class="card-tag">Skill</span><span class="card-tag">机制</span></div></div>
+<div class="card-content">
+<p>Skill是AI能力的一种<strong>可复用封装</strong>。如果说Prompt是"菜谱"，那么Skill就是"自动化厨房"——它把Prompt、工具和流程打包成一个可一键调用的能力单元。</p>
+
+<h3>Skill的完整定义</h3>
+<p>一个Skill由三个核心部分组成：</p>
+<ul>
+<li><strong>name（名称）</strong>：Skill的唯一标识，用户通过名称触发调用。例如"竞品分析"、"周报生成"。</li>
+<li><strong>description（描述）</strong>：简短说明Skill的功能和适用场景，帮助用户判断何时使用。好的描述 = 触发条件 + 能力范围 + 输出类型。</li>
+<li><strong>正文（指令内容）</strong>：完整的执行指令，包含角色设定、任务流程、输出规范等。这是Skill的"大脑"。</li>
+</ul>
+
+<div class="svg-container">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="skill-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ec4899"/><stop offset="100%" stop-color="#f472b6"/></linearGradient></defs>
+<rect x="50" y="30" width="180" height="140" rx="12" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/>
+<text x="140" y="58" text-anchor="middle" fill="#ec4899" font-size="13" font-weight="700">平时展示</text>
+<rect x="70" y="72" width="140" height="32" rx="6" fill="#ec4899" opacity="0.15" stroke="#ec4899"/>
+<text x="140" y="93" text-anchor="middle" fill="#db2777" font-size="12" font-weight="600">name + description</text>
+<text x="140" y="130" text-anchor="middle" fill="#94a3b8" font-size="11">轻量，用户一眼即可</text>
+<text x="140" y="148" text-anchor="middle" fill="#94a3b8" font-size="11">判断是否需要此Skill</text>
+<text x="310" y="105" fill="#94a3b8" font-size="22">→</text>
+<rect x="370" y="30" width="280" height="140" rx="12" fill="#fff" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="510" y="58" text-anchor="middle" fill="#ec4899" font-size="13" font-weight="700">触发时加载</text>
+<rect x="390" y="72" width="240" height="80" rx="6" fill="#fdf2f8" stroke="#ec4899" opacity="0.3"/>
+<text x="510" y="95" text-anchor="middle" fill="#db2777" font-size="11" font-weight="600">完整Skill正文</text>
+<text x="510" y="115" text-anchor="middle" fill="#64748b" font-size="10">角色 + 流程 + 约束 + 输出规范</text>
+<text x="510" y="140" text-anchor="middle" fill="#94a3b8" font-size="11">完整加载到上下文</text>
+</svg>
+<div class="svg-caption">图5-1：Skill渐进式披露机制 —— 平时只显示名称和描述，触发时才加载完整内容</div>
+</div>
+
+<h3>Skill vs Prompt vs Agent 详细对比</h3>
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>维度</th><th>Prompt</th><th>Skill</th><th>Agent</th></tr></thead>
+<tbody>
+<tr><td><strong>本质</strong></td><td>一次性指令</td><td>可复用的知识封装</td><td>自主行动执行系统</td></tr>
+<tr><td><strong>结构</strong></td><td>自由文本</td><td>name + description + 正文</td><td>目标 + 工具 + 记忆 + 规划</td></tr>
+<tr><td><strong>复用性</strong></td><td>低（每次重写）</td><td>高（一键调用）</td><td>高（持续运行）</td></tr>
+<tr><td><strong>执行方式</strong></td><td>手动粘贴发送</td><td>用户触发加载</td><td>自主循环执行</td></tr>
+<tr><td><strong>流程复杂度</strong></td><td>单步</td><td>单活动（可含子步骤）</td><td>多步骤自动编排</td></tr>
+<tr><td><strong>上下文管理</strong></td><td>用户自己管理</td><td>封装在Skill内部</td><td>Agent自动维护</td></tr>
+<tr><td><strong>工具调用</strong></td><td>无</td><td>可选（预定义）</td><td>核心能力</td></tr>
+<tr><td><strong>适用场景</strong></td><td>探索性对话</td><td>标准化重复任务</td><td>复杂多步任务</td></tr>
+<tr><td><strong>类比</strong></td><td>口头嘱咐</td><td>标准操作手册</td><td>一个能干事的员工</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Skill vs 普通Prompt的区别</h3>
+<ul>
+<li><strong>Prompt</strong>：手动输入，单次执行，结果不可控</li>
+<li><strong>Skill</strong>：预定义流程，可重复调用，结果标准化</li>
+</ul>
+
+<div class="callout tip">
+<div class="callout-title">💡 好的Skill description示例</div>
+<p><strong>差</strong>："帮你分析数据" —— 太模糊，不知道何时触发、分析什么。</p>
+<p><strong>好</strong>："当用户上传Excel/CSV文件并要求分析时，自动进行数据清洗、统计摘要、可视化图表生成，输出结构化分析报告" —— 明确了触发条件、执行流程、输出格式。</p>
+</div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解Skill的三个核心组成部分</li><li>掌握Skill的渐进式披露机制</li><li>区分Skill和Prompt的差异</li><li>学会写高质量的Skill description</li></ul></div>
+</div>
+</div>
+
+<!-- Skill L2 (原lesson-20) -->
+<div class="card" id="lesson-20">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#ec4899"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#ec4899">L2</span><h3 class="card-title">设计你的第一个Skill</h3></div>
+<div class="card-tags"><span class="card-tag">Skill</span><span class="card-tag">设计</span></div></div>
+<div class="card-content">
+<p>设计Skill的核心流程：<strong>识别高频场景 → 提取最佳Prompt → 封装为可复用单元 → 测试迭代</strong>。</p>
+
+<h3>Skill设计5步法</h3>
+<ol>
+<li><strong>场景识别</strong>：回顾过去两周，哪些任务你反复用AI做？列出频率TOP3的场景。例如：每周写周报、每天分析用户反馈、每次会议后整理纪要。频率越高，Skill的价值越大。</li>
+<li><strong>Prompt提炼</strong>：找到对应场景中效果最好的Prompt版本。对比3-5个版本的输出质量，选择最优的作为基础。注意保留那些"魔法词"——让输出质量突然提升的关键短语。</li>
+<li><strong>参数化</strong>：把可变部分提取为参数。例如周报Skill中，"本周工作内容"、"下周计划"就是参数。用【】或{ }标记参数位置，让Skill可以适应不同输入。</li>
+<li><strong>封装</strong>：将提炼后的Prompt包装为标准Skill结构——加上name、description、输入规范、输出格式、边界条件和异常处理指引。确保任何人拿到这个Skill都能用。</li>
+<li><strong>测试</strong>：用3-5个不同场景验证Skill的输出质量。检查边界情况（空输入、超长输入、格式异常输入）。记录问题并回到第2步迭代优化。</li>
+</ol>
+
+<div class="svg-container">
+<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-skill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#ec4899"/></marker></defs>
+<text x="350" y="25" text-anchor="middle" fill="#ec4899" font-size="13" font-weight="700">Skill设计流程图</text>
+<rect x="30" y="50" width="100" height="44" rx="22" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/><text x="80" y="77" text-anchor="middle" fill="#db2777" font-size="11" font-weight="600">1.场景识别</text>
+<line x1="130" y1="72" x2="160" y2="72" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arr-skill)"/>
+<rect x="160" y="50" width="100" height="44" rx="22" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/><text x="210" y="77" text-anchor="middle" fill="#db2777" font-size="11" font-weight="600">2.Prompt提炼</text>
+<line x1="260" y1="72" x2="290" y2="72" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arr-skill)"/>
+<rect x="290" y="50" width="100" height="44" rx="22" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/><text x="340" y="77" text-anchor="middle" fill="#db2777" font-size="11" font-weight="600">3.参数化</text>
+<line x1="390" y1="72" x2="420" y2="72" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arr-skill)"/>
+<rect x="420" y="50" width="100" height="44" rx="22" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/><text x="470" y="77" text-anchor="middle" fill="#db2777" font-size="11" font-weight="600">4.封装</text>
+<line x1="520" y1="72" x2="550" y2="72" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arr-skill)"/>
+<rect x="550" y="50" width="100" height="44" rx="22" fill="#ec4899"/><text x="600" y="77" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">5.测试</text>
+<path d="M600,94 Q600,140 80,140 Q80,94" fill="none" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-skill)"/>
+<text x="340" y="155" text-anchor="middle" fill="#94a3b8" font-size="10">测试不通过 → 回到步骤2迭代优化</text>
+</svg>
+<div class="svg-caption">图5-2：Skill设计5步法流程图 —— 测试不通过则迭代回Prompt提炼阶段</div>
+</div>
+
+<h3>Skill文件结构示例</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content">---
+name: weekly-report-generator
+description: 当用户需要生成周报时，根据本周工作记录和下周计划，自动生成结构清晰的专业周报。
+---
+
+## 角色
+你是一位资深的项目经理助手，擅长将零散的工作记录整理为结构清晰、重点突出的周报。
+
+## 任务
+根据用户提供的本周工作内容，生成一份专业周报。
+
+## 输入
+- 【本周工作记录】：用户本周完成的工作事项
+- 【下周计划】：用户下周的工作安排（可选）
+- 【遇到的问题】：本周遇到的困难和解决方案（可选）
+
+## 输出格式
+### 本周工作总结
+（按重要程度排序，3-5项关键成果）
+
+### 数据指标
+（如有量化数据，列出关键数字）
+
+### 风险与问题
+（遇到的问题 + 已采取的措施 + 需要的支持）
+
+### 下周计划
+（按优先级排序的行动项）</div></div>
+
+<div class="callout tip">
+<div class="callout-title">💡 Skill设计要点</div>
+<p>一个好的Skill应该像API一样——<strong>输入明确、输出明确、边界清晰</strong>。任何人拿到这个Skill，不需要额外的上下文就能正确使用。</p>
+</div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握Skill设计的5步法详细流程</li><li>学会将Prompt参数化</li><li>理解Skill文件的标准结构</li><li>能设计一个完整可用的Skill</li></ul></div>
+</div>
+</div>
+
+<!-- Skill L3 (原lesson-21) -->
+<div class="card" id="lesson-21">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#ec4899"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#ec4899">L3</span><h3 class="card-title">Skill组合与生态</h3></div>
+<div class="card-tags"><span class="card-tag">Skill</span><span class="card-tag">生态</span></div></div>
+<div class="card-content">
+<p>单个Skill解决单一问题。多个Skill<strong>组合</strong>，就能构建复杂的AI工作流，形成你的<strong>个人AI能力生态</strong>。</p>
+
+<h3>Skill之间如何组合</h3>
+<p>Skill的组合不是简单的拼接，而是像乐高积木一样，每个Skill都有标准化的"接口"（输入/输出规范），使得不同Skill之间可以无缝衔接。</p>
+<ul>
+<li><strong>串行链</strong>：A的输出是B的输入（如：数据分析Skill → 报告生成Skill → 审校Skill）。关键是确保A的输出格式符合B的输入要求。</li>
+<li><strong>并行分支</strong>：多个Skill同时处理不同子任务（如：同时用3个不同视角的"分析Skill"处理同一份数据，最后汇总）。适合需要多角度分析的复杂场景。</li>
+<li><strong>条件路由</strong>：根据A的结果决定调用B还是C（如：情感分析Skill判断用户反馈为"负面"后，触发"危机响应Skill"）。实现初步的智能化分发。</li>
+<li><strong>反馈循环</strong>：C的输出反馈给A，持续优化（如：生成Skill产出初稿 → 评审Skill给出意见 → 生成Skill根据意见修改）。这是最强大的组合模式。</li>
+</ul>
+
+<h3>Skill迭代方法论</h3>
+<p>好的Skill不是一次设计出来的，而是不断迭代出来的。推荐的迭代节奏：</p>
+<ol>
+<li><strong>第一周</strong>：设计最小可用版本，聚焦核心场景，不追求完美</li>
+<li><strong>第二周</strong>：收集使用反馈，记录哪些地方输出不好</li>
+<li><strong>第三周</strong>：针对性优化Prompt中的薄弱环节</li>
+<li><strong>第四周</strong>：扩展边界场景，增加异常处理</li>
+<li><strong>持续</strong>：每月review一次，保持Skill与实际需求的同步</li>
+</ol>
+<p>核心原则：<strong>每次只改一个变量</strong>。如果你同时修改了角色设定、输出格式和流程步骤，就无法判断哪个改动带来了效果提升。</p>
+
+<div class="callout warning">
+<div class="callout-title">⚠️ 常见Skill设计陷阱</div>
+<p><strong>陷阱1：万能Skill陷阱</strong> —— 试图做一个"什么都行"的Skill，结果什么都不精。正确做法：一个Skill只做好一件事。</p>
+<p><strong>陷阱2：过度参数化</strong> —— 提取了太多参数，使用时填写负担比直接写Prompt还重。正确做法：只提取真正变化的3-5个核心参数。</p>
+<p><strong>陷阱3：忽视边界情况</strong> —— 只用理想输入测试，遇到空输入、超长输入、格式异常输入就崩溃。正确做法：测试时故意使用"难缠"的输入。</p>
+<p><strong>陷阱4： copy-paste堆砌</strong> —— 把多个Prompt简单拼在一起就叫Skill。正确做法：Skill应该有清晰的逻辑结构和明确的流程。</p>
+</div>
+
+<div class="callout tip"><div class="callout-title">💡 生态思维</div><p>随着你积累的Skill越来越多，你会形成自己的"AI工具箱"。好的Skill生态应该像乐高积木——每个Skill都是标准化的组件，可以灵活组合解决不同问题。</p></div>
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握Skill组合的四种策略</li><li>理解Skill迭代方法论</li><li>识别并避免常见Skill设计陷阱</li><li>开始构建个人AI能力矩阵</li></ul></div>
+</div>
+</div>
+</div><!-- end module-5 -->
+
+
+<!-- ===== 模块六：Agent篇 ===== -->
+<div class="module" id="module-6">
+<div class="module-header">
+<div class="module-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">六</div>
+<div><h2>Agent篇</h2><p>从对话到行动，理解AI Agent的完整世界</p></div>
+</div>
+
+<!-- Agent L1 -->
+<div class="card" id="lesson-22">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#06b6d4"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#06b6d4">L1</span><h3 class="card-title">什么是Agent</h3></div>
+<div class="card-tags"><span class="card-tag">Agent</span><span class="card-tag">概念</span></div></div>
+<div class="card-content">
+<p>Agent（智能体）是当前AI领域最前沿的发展方向。简单来说，<strong>Agent = LLM（大脑）+ Memory（记忆）+ Tool Use（工具调用）+ Planning（规划能力）</strong>。如果说Skill是"菜谱"，那么Agent就是"一个会做菜的厨师"——它不仅能理解菜谱，还能自己选择工具、判断火候、品尝味道，直到做出满意的菜品。</p>
+
+<h3>Agent与普通对话的根本区别</h3>
+<p>LLM的普通对话模式是<strong>"说完就停"</strong>——你问一个问题，它回答后等待下一个指令。而Agent是<strong>"做完才停"</strong>——你给它一个目标，它会自主规划步骤、调用工具、检查结果、调整策略，直到任务完成。</p>
+
+<div class="svg-container">
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-agent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#06b6d4"/></marker></defs>
+<text x="350" y="25" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700">Agent执行循环</text>
+<rect x="240" y="45" width="220" height="48" rx="24" fill="#06b6d4"/><text x="350" y="75" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">🧠 思考（Think）</text>
+<line x1="350" y1="93" x2="350" y2="118" stroke="#06b6d4" stroke-width="2" marker-end="url(#arr-agent)"/>
+<rect x="240" y="120" width="220" height="48" rx="24" fill="#0891b2"/><text x="350" y="150" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">📋 规划（Plan）</text>
+<line x1="350" y1="168" x2="350" y2="193" stroke="#0891b2" stroke-width="2" marker-end="url(#arr-agent)"/>
+<rect x="240" y="195" width="220" height="48" rx="24" fill="#0e7490"/><text x="350" y="225" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">🔧 执行（Act）</text>
+<line x1="350" y1="243" x2="350" y2="268" stroke="#0e7490" stroke-width="2" marker-end="url(#arr-agent)"/>
+<rect x="240" y="270" width="220" height="48" rx="24" fill="#155e75"/><text x="350" y="300" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">👁 观察（Observe）</text>
+<path d="M240,294 Q100,294 100,165 Q100,50 240,69" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr-agent)"/>
+<text x="72" y="180" fill="#06b6d4" font-size="10" font-weight="600" transform="rotate(-90,72,180)">调整策略 → 继续循环</text>
+<rect x="520" y="120" width="160" height="120" rx="10" fill="#ecfeff" stroke="#06b6d4" stroke-width="1"/>
+<text x="600" y="142" text-anchor="middle" fill="#0891b2" font-size="11" font-weight="600">循环终止条件</text>
+<text x="600" y="165" text-anchor="middle" fill="#334155" font-size="10">✅ 任务目标达成</text>
+<text x="600" y="182" text-anchor="middle" fill="#334155" font-size="10">⏰ 达到最大轮次</text>
+<text x="600" y="199" text-anchor="middle" fill="#334155" font-size="10">❌ 遇到无法解决的错误</text>
+<text x="600" y="226" text-anchor="middle" fill="#334155" font-size="10">输出最终结果</text>
+</svg>
+<div class="svg-caption">图6-1：Agent执行循环 —— 思考→规划→执行→观察→调整→循环</div>
+</div>
+
+<h3>Agent的5个层级</h3>
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>层级</th><th>名称</th><th>能力描述</th><th>典型代表</th></tr></thead>
+<tbody>
+<tr><td><strong>L1</strong></td><td>对话</td><td>一问一答，说完就停</td><td>普通ChatGPT对话</td></tr>
+<tr><td><strong>L2</strong></td><td>任务</td><td>能完成单一具体任务</td><td>Claude分析文件</td></tr>
+<tr><td><strong>L3</strong></td><td>流程</td><td>能按预设流程执行多步骤任务</td><td>Cursor多文件编辑</td></tr>
+<tr><td><strong>L4</strong></td><td>自主</td><td>能自主规划、调整策略</td><td>Devin、AutoGPT</td></tr>
+<tr><td><strong>L5</strong></td><td>协作</td><td>多个Agent协同完成复杂项目</td><td>Multi-Agent系统</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout">
+<div class="callout-title">🧑‍💼 类比理解Agent</div>
+<p>Agent就像一个<strong>虚拟员工</strong>。你不会给员工写详细的每一步指令（那是Prompt），也不会只给他一个模板（那是Skill）。你给员工的是一个<strong>目标</strong>和<strong>资源</strong>，让他自己想办法完成。Agent也是一样——你定义目标，它自己规划执行。</p>
+</div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解Agent的四大核心组成</li><li>掌握Agent与普通对话的本质区别</li><li>认识Agent的5个能力层级</li></ul></div>
+</div>
+</div>
+
+<!-- Agent L2 -->
+<div class="card" id="lesson-23">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#06b6d4"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#06b6d4">L2</span><h3 class="card-title">Agent vs Skill 详细对比</h3></div>
+<div class="card-tags"><span class="card-tag">Agent</span><span class="card-tag">对比</span></div></div>
+<div class="card-content">
+<p>理解Agent和Skill的区别，是正确选择工具的关键。它们不是替代关系，而是<strong>互补关系</strong>——Skill封装知识，Agent执行行动。</p>
+
+<h3>本质区别对比</h3>
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>维度</th><th>Skill</th><th>Agent</th></tr></thead>
+<tbody>
+<tr><td><strong>本质</strong></td><td>知识封装</td><td>行动执行</td></tr>
+<tr><td><strong>输入</strong></td><td>用户触发+参数</td><td>目标/任务描述</td></tr>
+<tr><td><strong>输出</strong></td><td>单个数据对象</td><td>端到端结果</td></tr>
+<tr><td><strong>流程</strong></td><td>单一活动</td><td>多步骤自动流程</td></tr>
+<tr><td><strong>记忆</strong></td><td>无</td><td>有上下文记忆</td></tr>
+<tr><td><strong>工具调用</strong></td><td>无</td><td>可调用外部工具</td></tr>
+<tr><td><strong>自主决策</strong></td><td>无</td><td>有规划和调整能力</td></tr>
+<tr><td><strong>典型场景</strong></td><td>竞品分析、文档摘要</td><td>自动报告生成、智能客服</td></tr>
+<tr><td><strong>类比</strong></td><td>一本菜谱</td><td>一个厨师</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="svg-container">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="skill-ag" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ec4899"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
+<rect x="30" y="40" width="240" height="150" rx="16" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/>
+<text x="150" y="68" text-anchor="middle" fill="#ec4899" font-size="14" font-weight="700">📖 Skill（菜谱）</text>
+<text x="150" y="95" text-anchor="middle" fill="#334155" font-size="11">封装了知识和流程</text>
+<text x="150" y="115" text-anchor="middle" fill="#334155" font-size="11">输入参数 → 标准化输出</text>
+<text x="150" y="135" text-anchor="middle" fill="#334155" font-size="11">被动等待触发</text>
+<text x="150" y="160" text-anchor="middle" fill="#94a3b8" font-size="10">一次处理，结果确定</text>
+<rect x="420" y="40" width="240" height="150" rx="16" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="540" y="68" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700">🧑‍🍳 Agent（厨师）</text>
+<text x="540" y="95" text-anchor="middle" fill="#334155" font-size="11">拥有知识+行动能力</text>
+<text x="540" y="115" text-anchor="middle" fill="#334155" font-size="11">接收目标 → 自主规划执行</text>
+<text x="540" y="135" text-anchor="middle" fill="#334155" font-size="11">主动调用工具</text>
+<text x="540" y="160" text-anchor="middle" fill="#94a3b8" font-size="10">多步迭代，结果涌现</text>
+<line x1="270" y1="115" x2="420" y2="115" stroke="url(#skill-ag)" stroke-width="2.5" marker-end="url(#arr-agent)"/>
+<text x="345" y="105" text-anchor="middle" fill="#64748b" font-size="10" font-weight="600">能力递进</text>
+</svg>
+<div class="svg-caption">图6-2：Skill vs Agent 对比 —— 从菜谱到厨师，从被动到主动</div>
+</div>
+
+<h3>什么时候用Skill？什么时候用Agent？</h3>
+<div class="decision-tree">
+<h3>决策树</h3>
+<p><strong>问题1</strong>：你的任务需要多步迭代吗？</p>
+<ul>
+<li>否（一次处理即可）→ <strong>用Skill</strong></li>
+<li>是 → 继续判断</li>
+</ul>
+<p><strong>问题2</strong>：执行过程中需要根据中间结果做决策吗？</p>
+<ul>
+<li>否（流程固定）→ <strong>用Skill组合（串行链）</strong></li>
+<li>是 → 继续判断</li>
+</ul>
+<p><strong>问题3</strong>：需要调用外部工具（搜索、计算、数据库）吗？</p>
+<ul>
+<li>否 → <strong>用高级Skill</strong></li>
+<li>是 → <strong>用Agent</strong></li>
+</ul>
+</div>
+
+<div class="callout">
+<div class="callout-title">💡 核心判断准则</div>
+<p>如果任务只需要<strong>"一次处理"</strong>→ 用Skill。如果任务需要<strong>"多步迭代+自主决策"</strong>→ 用Agent。</p>
+<p>Skill是Agent的基石——好的Agent内部往往调用多个Skill来完成子任务。掌握Skill设计是构建Agent的前提。</p>
+</div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>深刻理解Skill与Agent的本质区别</li><li>掌握Skill vs Agent的决策树</li><li>理解Skill是Agent的基石</li></ul></div>
+</div>
+</div>
+
+<!-- Agent L3 -->
+<div class="card" id="lesson-24">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#06b6d4"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#06b6d4">L3</span><h3 class="card-title">Agent的工作原理</h3></div>
+<div class="card-tags"><span class="card-tag">Agent</span><span class="card-tag">原理</span></div></div>
+<div class="card-content">
+<p>理解Agent的工作原理，关键在于理解它的<strong>执行循环</strong>：Observe（观察）→ Think（思考）→ Act（执行）→ Reflect（反思）。这个循环不断重复，直到任务完成。</p>
+
+<h3>执行循环详解</h3>
+<ol>
+<li><strong>Observe（观察）</strong>：Agent首先"看"当前状态——用户的原始需求、之前的执行结果、外部环境的变化。就像项目经理先了解项目现状。</li>
+<li><strong>Think（思考）</strong>：基于观察到的信息，LLM核心进行推理——分析问题、评估选项、制定策略。这是Agent的"大脑"在工作。</li>
+<li><strong>Act（执行）</strong>：根据思考的结果，选择并执行一个行动——可能是生成文本、调用API、搜索信息、修改文件等。</li>
+<li><strong>Reflect（反思）</strong>：检查执行结果是否符合预期。如果不符合，调整策略回到Think阶段；如果符合，继续下一步或完成。</li>
+</ol>
+
+<div class="svg-container">
+<svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-ag2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#06b6d4"/></marker></defs>
+<text x="350" y="25" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700">Agent内部架构图</text>
+<!-- LLM Core -->
+<rect x="220" y="100" width="260" height="80" rx="16" fill="#06b6d4"/><text x="350" y="130" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">🧠 LLM 核心引擎</text>
+<text x="350" y="155" text-anchor="middle" fill="#cffafe" font-size="11">推理 · 规划 · 决策</text>
+<!-- Memory -->
+<rect x="30" y="50" width="150" height="70" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="105" y="78" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">💾 记忆模块</text>
+<text x="105" y="100" text-anchor="middle" fill="#64748b" font-size="10">上下文 · 历史记录</text>
+<!-- Tools -->
+<rect x="520" y="50" width="150" height="70" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="595" y="78" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">🧰 工具箱</text>
+<text x="595" y="100" text-anchor="middle" fill="#64748b" font-size="10">搜索 · 计算 · API</text>
+<!-- Planner -->
+<rect x="30" y="160" width="150" height="70" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="105" y="188" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">📋 规划器</text>
+<text x="105" y="210" text-anchor="middle" fill="#64748b" font-size="10">任务拆解 · 步骤排序</text>
+<!-- Output -->
+<rect x="520" y="160" width="150" height="70" rx="12" fill="#cffafe" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="595" y="188" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">📤 输出</text>
+<text x="595" y="210" text-anchor="middle" fill="#64748b" font-size="10">结果 · 报告 · 文件</text>
+<!-- User Input -->
+<rect x="220" y="260" width="260" height="50" rx="12" fill="#f0fdfa" stroke="#10b981" stroke-width="1.5"/>
+<text x="350" y="290" text-anchor="middle" fill="#059669" font-size="12" font-weight="600">👤 用户目标 / 任务描述</text>
+<!-- Arrows -->
+<line x1="180" y1="90" x2="220" y2="120" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arr-ag2)"/>
+<line x1="480" y1="120" x2="520" y2="90" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arr-ag2)"/>
+<line x1="180" y1="195" x2="220" y2="155" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arr-ag2)"/>
+<line x1="480" y1="155" x2="520" y2="195" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arr-ag2)"/>
+<line x1="350" y1="260" x2="350" y2="180" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr-ag2)"/>
+</svg>
+<div class="svg-caption">图6-3：Agent内部架构 —— LLM核心 + 四大辅助模块</div>
+</div>
+
+<div class="callout">
+<div class="callout-title">🧑‍💼 通俗比喻：Agent就像一个项目经理</div>
+<p>项目经理不会自己写代码、做设计、写文案，但他知道<strong>什么时候该做什么</strong>、<strong>交给谁做</strong>、<strong>怎么做</strong>。Agent也是一样——LLM是项目经理的大脑，工具箱是团队里的专业人员，记忆模块是项目文档，规划器是项目计划。</p>
+</div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>理解Agent的四步执行循环</li><li>掌握Agent的四大内部模块</li><li>用项目经理类比理解Agent工作原理</li></ul></div>
+</div>
+</div>
+
+<!-- Agent L4 -->
+<div class="card" id="lesson-25">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#06b6d4"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#06b6d4">L4</span><h3 class="card-title">Agent的应用场景</h3></div>
+<div class="card-tags"><span class="card-tag">Agent</span><span class="card-tag">场景</span></div></div>
+<div class="card-content">
+<p>Agent在企业中已经有大量成功的落地案例。理解这些场景，可以帮助你找到Agent在自己工作中的切入点。</p>
+
+<div class="svg-container">
+<svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+<text x="350" y="25" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700">Agent应用场景分类</text>
+<rect x="30" y="50" width="300" height="100" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="180" y="78" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">📊 数据分析Agent</text>
+<text x="180" y="100" text-anchor="middle" fill="#334155" font-size="10">自动读取数据 → 清洗 → 分析 → 生成报告</text>
+<text x="180" y="120" text-anchor="middle" fill="#334155" font-size="10">替代分析师30-50%的重复工作</text>
+<text x="180" y="140" text-anchor="middle" fill="#94a3b8" font-size="9">典型：每周自动生成销售数据周报</text>
+<rect x="370" y="50" width="300" height="100" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="520" y="78" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">🤖 智能客服Agent</text>
+<text x="520" y="100" text-anchor="middle" fill="#334155" font-size="10">理解意图 → 查询知识库 → 生成回复</text>
+<text x="520" y="120" text-anchor="middle" fill="#334155" font-size="10">处理70%常见咨询，复杂问题转人工</text>
+<text x="520" y="140" text-anchor="middle" fill="#94a3b8" font-size="9">典型：7x24小时多语言客户支持</text>
+<rect x="30" y="170" width="300" height="100" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="180" y="198" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">📝 内容生成Agent</text>
+<text x="180" y="220" text-anchor="middle" fill="#334155" font-size="10">收集素材 → 大纲 → 初稿 → 审校 → 定稿</text>
+<text x="180" y="240" text-anchor="middle" fill="#334155" font-size="10">多轮迭代生成高质量长文内容</text>
+<text x="180" y="258" text-anchor="middle" fill="#94a3b8" font-size="9">典型：自动生成行业研究报告</text>
+<rect x="370" y="170" width="300" height="100" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+<text x="520" y="198" text-anchor="middle" fill="#0891b2" font-size="13" font-weight="600">💬 VOC分析Agent</text>
+<text x="520" y="220" text-anchor="middle" fill="#334155" font-size="10">采集反馈 → 分类标注 → 情感分析 → 洞察</text>
+<text x="520" y="240" text-anchor="middle" fill="#334155" font-size="10">实时监控用户声音，自动预警</text>
+<text x="520" y="258" text-anchor="middle" fill="#94a3b8" font-size="9">典型：电商评论自动分类与趋势分析</text>
+</svg>
+<div class="svg-caption">图6-4：Agent四大典型应用场景</div>
+</div>
+
+<h3>场景详解</h3>
+<ul>
+<li><strong>自动报告生成</strong>：Agent从数据库/API获取原始数据，自动清洗、计算指标、生成图表，最终输出完整的结构化报告。适合需要定期输出的重复性报告任务。</li>
+<li><strong>智能客服</strong>：Agent理解用户问题，查询产品知识库，生成个性化回复。能处理多轮对话、识别用户情绪、在无法解决时自动转接人工。</li>
+<li><strong>数据分析流水线</strong>：Agent自动完成数据收集→清洗→分析→可视化的完整流程。每次分析后还能自我检查数据质量，发现异常自动预警。</li>
+<li><strong>VOC（客户声音）分析</strong>：Agent从多个渠道采集用户反馈，自动分类标注，进行情感分析和主题提取，生成用户洞察报告。</li>
+</ul>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>了解Agent的四大典型应用场景</li><li>理解每个场景的工作模式</li><li>找到Agent在自己工作中的切入点</li></ul></div>
+</div>
+</div>
+
+<!-- Agent L5 -->
+<div class="card" id="lesson-26">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#06b6d4"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#06b6d4">L5</span><h3 class="card-title">Agent的设计与构建</h3></div>
+<div class="card-tags"><span class="card-tag">Agent</span><span class="card-tag">设计</span></div></div>
+<div class="card-content">
+<p>设计一个好的Agent需要考虑四个关键要素：<strong>目标定义、工具选择、记忆策略、反馈机制</strong>。</p>
+
+<h3>设计关键要素</h3>
+<ol>
+<li><strong>目标定义</strong>：Agent的目标必须清晰、可衡量、有边界。"帮我分析数据"不是好目标，"每周五自动生成上周的销售数据报告，包含Top10产品排名和环比变化"才是好目标。</li>
+<li><strong>工具选择</strong>：根据任务需要选择合适的工具。数据分析Agent需要数据库连接+统计计算工具，内容生成Agent需要搜索引擎+写作工具。工具不在多，在于精准匹配需求。</li>
+<li><strong>记忆策略</strong>：决定Agent"记住"什么、记住多久。短期记忆（当前任务的上下文）vs 长期记忆（历史经验积累）。好的记忆策略让Agent越用越聪明。</li>
+<li><strong>反馈机制</strong>：Agent如何知道自己做的好不好？需要设计明确的评估标准和纠错机制。人工抽检、自动校验、对比基准线，都是常见的反馈方式。</li>
+</ol>
+
+<div class="svg-container">
+<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-ag5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#06b6d4"/></marker></defs>
+<text x="350" y="25" text-anchor="middle" fill="#06b6d4" font-size="13" font-weight="700">Agent设计流程</text>
+<rect x="20" y="50" width="120" height="48" rx="10" fill="#06b6d4"/><text x="80" y="79" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">🎯 定义目标</text>
+<line x1="140" y1="74" x2="168" y2="74" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arr-ag5)"/>
+<rect x="168" y="50" width="120" height="48" rx="10" fill="#0891b2"/><text x="228" y="79" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">🧰 选择工具</text>
+<line x1="288" y1="74" x2="316" y2="74" stroke="#0891b2" stroke-width="1.5" marker-end="url(#arr-ag5)"/>
+<rect x="316" y="50" width="120" height="48" rx="10" fill="#0e7490"/><text x="376" y="79" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">💾 记忆策略</text>
+<line x1="436" y1="74" x2="464" y2="74" stroke="#0e7490" stroke-width="1.5" marker-end="url(#arr-ag5)"/>
+<rect x="464" y="50" width="120" height="48" rx="10" fill="#155e75"/><text x="524" y="79" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">🔄 反馈机制</text>
+<line x1="584" y1="74" x2="612" y2="74" stroke="#155e75" stroke-width="1.5" marker-end="url(#arr-ag5)"/>
+<rect x="612" y="50" width="70" height="48" rx="10" fill="#10b981"/><text x="647" y="79" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">✅ 上线</text>
+<path d="M647,98 Q647,150 80,150 Q80,98" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-ag5)"/>
+<text x="363" y="168" text-anchor="middle" fill="#94a3b8" font-size="10">持续收集反馈 → 迭代优化 → 重新定义目标</text>
+</svg>
+<div class="svg-caption">图6-5：Agent设计流程 —— 从目标定义到上线，持续迭代</div>
+</div>
+
+<div class="callout tip">
+<div class="callout-title">💡 好Agent的4个标准</div>
+<p><strong>1. 目标清晰</strong>：任何人一看就知道Agent要做什么、不做什么。</p>
+<p><strong>2. 边界明确</strong>：知道什么时候该停止、什么情况该求助人工。</p>
+<p><strong>3. 结果可验</strong>：每次运行的结果都可以客观评估好坏。</p>
+<p><strong>4. 渐进增强</strong>：不需要一步到位，可以从简单版本开始逐步增强。</p>
+</div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握Agent设计的四大关键要素</li><li>理解好Agent的四个标准</li><li>学会从简单版本开始渐进增强</li></ul></div>
+</div>
+</div>
+
+<!-- Agent L6 -->
+<div class="card" id="lesson-27">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#06b6d4"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#06b6d4">L6</span><h3 class="card-title">Agent的评估与迭代</h3></div>
+<div class="card-tags"><span class="card-tag">Agent</span><span class="card-tag">评估</span></div></div>
+<div class="card-content">
+<p>构建Agent不是一蹴而就的。<strong>评估-迭代循环</strong>是让Agent持续进化的关键。好的Agent是"养"出来的，不是一次"写"出来的。</p>
+
+<h3>评估Agent的四维框架</h3>
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>评估维度</th><th>核心问题</th><th>评估方法</th><th>目标值</th></tr></thead>
+<tbody>
+<tr><td><strong>准确性</strong></td><td>Agent的输出是否正确？</td><td>人工抽检 + 自动校验</td><td>核心任务≥95%</td></tr>
+<tr><td><strong>完整性</strong></td><td>Agent是否完成了所有步骤？</td><td>检查点对比</td><td>≥90%任务完整</td></tr>
+<tr><td><strong>效率</strong></td><td>Agent完成任务的速度和成本？</td><td>对比人工基线</td><td>效率提升≥3倍</td></tr>
+<tr><td><strong>鲁棒性</strong></td><td>遇到异常输入是否稳定？</td><td>边界测试</td><td>异常情况下不崩溃</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>迭代方法论</h3>
+<p>Agent迭代的核心原则是<strong>"每次只改一个变量"</strong>：</p>
+<ol>
+<li><strong>建立基线</strong>：用当前版本跑10个标准测试用例，记录四维评估结果</li>
+<li><strong>定位瓶颈</strong>：找出得分最低的维度，分析根本原因</li>
+<li><strong>单一改动</strong>：针对瓶颈做且仅做一个改动（换Prompt、加工具、调记忆策略等）</li>
+<li><strong>对比验证</strong>：用相同的10个测试用例重新跑，对比改动前后的效果</li>
+<li><strong>保留或回滚</strong>：效果提升则保留，效果下降则回滚</li>
+</ol>
+
+<div class="svg-container">
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr-ag6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#06b6d4"/></marker></defs>
+<text x="300" y="25" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700">Agent迭代循环</text>
+<rect x="20" y="55" width="120" height="50" rx="10" fill="#06b6d4"/><text x="80" y="85" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">📊 建立基线</text>
+<line x1="140" y1="80" x2="168" y2="80" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arr-ag6)"/>
+<rect x="168" y="55" width="120" height="50" rx="10" fill="#0891b2"/><text x="228" y="85" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">🔍 定位瓶颈</text>
+<line x1="288" y1="80" x2="316" y2="80" stroke="#0891b2" stroke-width="1.5" marker-end="url(#arr-ag6)"/>
+<rect x="316" y="55" width="120" height="50" rx="10" fill="#0e7490"/><text x="376" y="85" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">🛠 单一改动</text>
+<line x1="436" y1="80" x2="464" y2="80" stroke="#0e7490" stroke-width="1.5" marker-end="url(#arr-ag6)"/>
+<rect x="464" y="55" width="120" height="50" rx="10" fill="#155e75"/><text x="524" y="85" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">📈 对比验证</text>
+<path d="M524,105 Q524,170 80,170 Q80,105" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr-ag6)"/>
+<rect x="220" y="140" width="160" height="36" rx="8" fill="#f0fdfa" stroke="#10b981"/>
+<text x="300" y="163" text-anchor="middle" fill="#059669" font-size="11" font-weight="600">效果提升？→ 保留 / 回滚</text>
+</svg>
+<div class="svg-caption">图6-6：Agent迭代循环 —— 建立基线→定位瓶颈→单一改动→对比验证</div>
+</div>
+
+<div class="callout warning">
+<div class="callout-title">⚠️ 迭代中的常见错误</div>
+<p><strong>错误1：同时改多个变量</strong> —— 改了Prompt又换了工具，效果提升了但不知道是哪个改动带来的。</p>
+<p><strong>错误2：测试用例太少</strong> —— 只用2-3个例子测试，容易过拟合到特定场景。</p>
+<p><strong>错误3：忽视回归测试</strong> —— 修复了一个问题，却导致了之前正常的场景出问题。</p>
+</div>
+
+<div class="learning-goals"><h4>学习目标</h4><ul><li>掌握Agent评估的四维框架</li><li>学会"每次只改一个变量"的迭代方法</li><li>避免常见的迭代错误</li></ul></div>
+</div>
+</div>
+</div><!-- end module-6 -->
+
+<!-- ===== 附录 ===== -->
+<div class="module" id="appendix">
+<div class="module-header">
+<div class="module-icon" style="background:linear-gradient(135deg,#94a3b8,#64748b)">附</div>
+<div><h2>附录</h2><p>词汇表、Prompt模板库、AI工具排行</p></div>
+</div>
+
+<!-- 词汇表 -->
+<div class="card" id="appendix-glossary">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#94a3b8"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#94a3b8">词</span><h3 class="card-title">词汇表</h3></div></div>
+<div class="card-content">
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>术语</th><th>英文</th><th>通俗解释</th></tr></thead>
+<tbody>
+<tr><td><strong>Token</strong></td><td>Token</td><td>AI处理文本的最小单位，可能是一个字、词或标点</td></tr>
+<tr><td><strong>大语言模型</strong></td><td>LLM</td><td>通过海量文本训练的AI模型，能理解和生成人类语言</td></tr>
+<tr><td><strong>词向量</strong></td><td>Word Embedding</td><td>把词变成数字的方式，意思相近的词数字也相近</td></tr>
+<tr><td><strong>注意力机制</strong></td><td>Attention</td><td>让模型在读到某个词时关注上下文中相关的其他词</td></tr>
+<tr><td><strong>幻觉</strong></td><td>Hallucination</td><td>AI自信地输出错误或虚构的信息</td></tr>
+<tr><td><strong>缩放定律</strong></td><td>Scaling Law</td><td>模型越大、数据越多、算力越强，能力越强</td></tr>
+<tr><td><strong>涌现能力</strong></td><td>Emergent Ability</td><td>小模型完全没有、大模型突然拥有的能力</td></tr>
+<tr><td><strong>检索增强</strong></td><td>RAG</td><td>让AI先搜索资料再回答，减少幻觉</td></tr>
+<tr><td><strong>智能体</strong></td><td>Agent</td><td>能自主规划和使用工具完成多步骤任务的AI系统</td></tr>
+<tr><td><strong>上下文窗口</strong></td><td>Context Window</td><td>AI一次能"看到"的最大文本长度</td></tr>
+<tr><td><strong>Temperature</strong></td><td>Temperature</td><td>控制AI输出随机性的参数，越低越确定，越高越多样</td></tr>
+<tr><td><strong>多模态</strong></td><td>Multimodal</td><td>能同时处理文字、图片、音频等多种信息的AI</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- Prompt模板库 -->
+<div class="card" id="appendix-prompts">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#94a3b8"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#94a3b8">模</span><h3 class="card-title">Prompt模板库</h3></div></div>
+<div class="card-content">
+<p>以下是本课程中提到的所有Prompt模板的汇总。</p>
+<h3>认知篇模板</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># AI能力评估Prompt
+请评估以下任务是否适合AI来完成：
+任务：【描述任务】
+请从以下维度分析：
+1. AI在此类任务上的表现如何？（0-10分）
+2. 最大的风险是什么？
+3. 哪些环节需要人工把关？
+4. 推荐的AI+人工协作模式是什么？</div></div>
+
+<h3>使用篇模板</h3>
+<div class="prompt-box"><div class="prompt-header"><button class="copy-btn" onclick="copyPrompt(this)">复制</button></div><div class="prompt-content"># 通用高效Prompt框架
+## 角色
+你是一位【角色描述】，具有【专业经验】。
+
+## 任务
+请帮我完成以下任务：
+【具体任务描述】
+
+## 上下文
+- 背景：【相关信息】
+- 约束：【限制条件】
+- 目标受众：【谁将使用结果】
+
+## 输出要求
+- 格式：【表格/列表/段落/代码】
+- 风格：【正式/轻松/技术性】
+- 长度：【具体字数或范围】
+
+## 示例（可选）
+【提供一个好的输出示例】</div></div>
+</div>
+</div>
+
+<!-- AI工具排行 -->
+<div class="card" id="appendix-tools">
+<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#94a3b8"></div>
+<div class="card-header"><div class="card-header-left"><span class="lesson-num" style="background:#94a3b8">工</span><h3 class="card-title">AI工具排行</h3></div></div>
+<div class="card-content">
+<div class="table-wrapper">
+<table class="data-table">
+<thead><tr><th>类别</th><th>推荐工具</th><th>特点</th><th>适合人群</th></tr></thead>
+<tbody>
+<tr><td><strong>对话AI</strong></td><td>Claude / ChatGPT / 豆包</td><td>综合能力强、生态完善</td><td>所有人</td></tr>
+<tr><td><strong>编程</strong></td><td>Cursor / Copilot / Windsurf</td><td>代码生成、补全、审查</td><td>开发者</td></tr>
+<tr><td><strong>写作</strong></td><td>Notion AI / 飞书AI / 秘塔</td><td>文档协作+AI辅助</td><td>内容创作者</td></tr>
+<tr><td><strong>设计</strong></td><td>Midjourney / DALL-E / 可灵</td><td>AI图片/视频生成</td><td>设计师</td></tr>
+<tr><td><strong>搜索</strong></td><td>Perplexity / 秘塔 / Kimi</td><td>AI增强的信息检索</td><td>研究者</td></tr>
+<tr><td><strong>数据分析</strong></td><td>Code Interpreter / Julius AI</td><td>自然语言数据分析</td><td>分析师</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<p>后湖AI课 · 希望帮你成为AI高手 · 2026版</p>
+<p>从认知到实践，掌握AI时代的核心竞争力</p>
+</div>
+</main>
+</div><!-- end layout -->
+
+<script>
+// ===== TOC Data with Module Groups =====
+const tocModules = [
+  { name: '认知篇', color: '#3b82f6', lessons: [
+    { id: 1, num: 'L1', title: 'AI的四次进化', href: '#lesson-1' },
+    { id: 2, num: 'L2', title: 'AI能做什么与不能做什么', href: '#lesson-2' },
+    { id: 3, num: 'L3', title: '从AI工具到AI驱动工作', href: '#lesson-3' },
+  ]},
+  { name: '原理篇', color: '#8b5cf6', lessons: [
+    { id: 4, num: 'L1', title: '语言的本质是数学', href: '#lesson-4' },
+    { id: 5, num: 'L2', title: '大模型的诞生', href: '#lesson-5' },
+    { id: 6, num: 'L3', title: 'LLM是如何工作的', href: '#lesson-6' },
+    { id: 7, num: 'L4', title: '多模态：感知的统一', href: '#lesson-7' },
+    { id: 8, num: 'L5', title: 'RAG：给大模型装上知识库', href: '#lesson-8' },
+    { id: 9, num: 'L6', title: 'Agent：从问答到行动', href: '#lesson-9' },
+  ]},
+  { name: '使用篇', color: '#10b981', lessons: [
+    { id: 10, num: 'L1', title: '识别真正的问题', href: '#lesson-10' },
+    { id: 11, num: 'L2', title: '认知镜像法', href: '#lesson-11' },
+    { id: 12, num: 'L3', title: '追问链与深度思考', href: '#lesson-12' },
+    { id: 13, num: 'L4', title: 'MECE结构化拆解', href: '#lesson-13' },
+    { id: 14, num: 'L5', title: '角色扮演与场景设定', href: '#lesson-14' },
+    { id: 15, num: 'L6', title: '多步骤复杂任务', href: '#lesson-15' },
+  ]},
+  { name: '构建篇', color: '#f59e0b', lessons: [
+    { id: 16, num: 'L1', title: '评估与选择', href: '#lesson-16' },
+    { id: 17, num: 'L2', title: '经验沉淀', href: '#lesson-17' },
+    { id: 18, num: 'L3', title: '从使用到构建', href: '#lesson-18' },
+  ]},
+  { name: 'Skill篇', color: '#ec4899', lessons: [
+    { id: 19, num: 'L1', title: 'Skill机制解析', href: '#lesson-19' },
+    { id: 20, num: 'L2', title: '设计你的第一个Skill', href: '#lesson-20' },
+    { id: 21, num: 'L3', title: 'Skill组合与生态', href: '#lesson-21' },
+  ]},
+  { name: 'Agent篇', color: '#06b6d4', lessons: [
+    { id: 22, num: 'L1', title: '什么是Agent', href: '#lesson-22' },
+    { id: 23, num: 'L2', title: 'Agent vs Skill', href: '#lesson-23' },
+    { id: 24, num: 'L3', title: 'Agent的工作原理', href: '#lesson-24' },
+    { id: 25, num: 'L4', title: 'Agent的应用场景', href: '#lesson-25' },
+    { id: 26, num: 'L5', title: 'Agent的设计与构建', href: '#lesson-26' },
+    { id: 27, num: 'L6', title: 'Agent的评估与迭代', href: '#lesson-27' },
+  ]},
+];
+
+// Render TOC with module groups
+function renderTOC() {
+  const container = document.getElementById('tocGrid');
+  if (!container) return;
+  let html = '';
+  tocModules.forEach(mod => {
+    html += '<div class="toc-group">';
+    html += '<div class="toc-group-title" style="color:' + mod.color + '">';
+    html += '<span class="group-dot" style="background:' + mod.color + '"></span>';
+    html += mod.name + '</div>';
+    html += '<div class="toc-grid">';
+    mod.lessons.forEach(lesson => {
+      html += '<div class="toc-card" onclick="location.href='' + lesson.href + ''" style="--accent:' + mod.color + '">';
+      html += '<div style="position:absolute;top:0;left:0;width:4px;height:100%;background:' + mod.color + '"></div>';
+      html += '<div class="toc-num" style="background:' + mod.color + '">' + lesson.num + '</div>';
+      html += '<div class="toc-card-title">' + lesson.title + '</div>';
+      html += '<div class="toc-card-module">' + mod.name + '</div>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+// ===== Copy Prompt Function =====
+function copyPrompt(btn) {
+  const box = btn.closest('.prompt-box');
+  const content = box.querySelector('.prompt-content');
+  if (!content) return;
+  const text = content.textContent.trim();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '已复制';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); btn.textContent = '已复制'; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+    } catch(e) {}
+    document.body.removeChild(ta);
+  }
+}
+
+// ===== Scroll Progress Bar =====
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  document.getElementById('progressBar').style.width = progress + '%';
+
+  // Back to top visibility
+  const btn = document.getElementById('backToTop');
+  if (scrollTop > 400) { btn.classList.add('visible'); } else { btn.classList.remove('visible'); }
+
+  // Active nav link
+  const cards = document.querySelectorAll('.card[id^="lesson-"]');
+  let activeId = null;
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if (rect.top <= 150 && rect.bottom > 150) {
+      activeId = card.id;
+    }
+  });
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('data-lesson')) {
+      const lessonNum = link.getAttribute('data-lesson');
+      const cardId = 'lesson-' + lessonNum;
+      if (cardId === activeId) {
+        link.classList.add('active');
+      }
+    }
+  });
+});
+
+// ===== Mobile Menu Toggle =====
+function toggleMenu() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+}
+
+// Close sidebar on nav link click (mobile)
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 900) {
+      toggleMenu();
+    }
+  });
+});
+
+// Initialize
+renderTOC();
+</script>
+</body>
+</html>
